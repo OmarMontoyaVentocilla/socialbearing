@@ -139,8 +139,19 @@ var config = {
      headers: {'X-CSRFToken': tokent}
 };
 
+var config2={
+    headers: {
+        'Access-Control-Allow-Origin': 'http://127.0.0.1:8000',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
+        'Access-Control-Allow-Headers': '"Origin, X-Requested-With, Content-Type, Accept"',
+        'Content-Type' : 'application/json',
+        crossdomain: true
+        }
+};
+
     export default{
        created(){
+         this.getocial();  
        },
        data(){
           return{
@@ -219,6 +230,15 @@ var config = {
             
 
 
+           },
+           getocial(){
+               axios.get('http://127.0.0.1:8000/search/getsocial',config2)
+               .then(response=>{
+                   console.log(response);
+               })
+                .catch(error=>{
+               console.log(error);
+               }) 
            },
            getScrap_tw(){
               let buscador=this.buscador;

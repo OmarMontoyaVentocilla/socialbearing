@@ -569,8 +569,7 @@ def getinsta(request):
 
 
 def gettrending(request):
-    buscador=request.GET.get('buscador')
-    soup = get_doc('https://trends24.in/{}'.format(buscador))
+    soup = get_doc('https://trends24.in/')
     tems=soup.select('div#trend-list')
     response=[]
     for i in tems:
@@ -582,7 +581,28 @@ def gettrending(request):
 
     data={'info_trending':response}
     return JsonResponse(data) 
-     
+
+
+@login_required(login_url="/accounts/login")
+def getsocial(request):
+    req = requests.get('https://socialbearing.com/scripts/get-tweets.php?sid=0&search=hola&searchtype=open')
+    #response = urllib.request.urlopen(req)
+    data=req.json()
+    response={
+        'data':data
+    }
+    return JsonResponse(response)
+
+@login_required(login_url="/accounts/login")
+def getsocialUser(request):
+    req = requests.get('https://socialbearing.com/scripts/get-tweets.php?sid=0&search=hola&searchtype=user')
+    #response = urllib.request.urlopen(req)
+    data=req.json()
+    response={
+        'data':data
+    }
+    return JsonResponse(response)
+
 
 @login_required(login_url="/accounts/login") 
 def gettw(request):
