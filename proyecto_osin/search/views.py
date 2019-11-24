@@ -598,7 +598,7 @@ def getsocial(request):
     geocode="-33.602131,-70.576876,100000km"
     date_since = "2019-11-16"
     #tweets = tweepy.Cursor(api.search,q=search_words,lang="es",geocode=geocode,since=date_since,tweet_mode='extended').items(100)
-    tweets = tweepy.Cursor(api.search,q=search_words,lang="es",since="2019-11-08",until="2019-11-10").items(10)
+    tweets = tweepy.Cursor(api.search,q=search_words,lang="es",since="2019-11-08",until="2019-11-16").items(200)
     response=[]
     responses=[]
     for i,tweet in enumerate(tweets):

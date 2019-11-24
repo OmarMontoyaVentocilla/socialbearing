@@ -29,6 +29,7 @@ import reporte from './components/Reporte.vue';
 import jastag from './components/Hastag.vue';
 import trending from './components/Trending.vue';
 import roles from './components/Roles.vue';
+import tweet from './components/Tweets.vue';
 
 const app = new Vue({
     el: '#app',
@@ -44,6 +45,7 @@ const app = new Vue({
         reporte,
         jastag,
         trending,
-        roles
+        roles,
+        tweet
     }
 });

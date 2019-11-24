@@ -127,9 +127,6 @@
 
   </div>
 </div>
-
-
-
     </div>  
 </template>
 <script>
@@ -151,7 +148,7 @@ var config2={
 
     export default{
        created(){
-         this.getocial();  
+         
        },
        data(){
           return{
@@ -231,15 +228,7 @@ var config2={
 
 
            },
-           getocial(){
-               axios.get('http://127.0.0.1:8000/search/getsocial',config2)
-               .then(response=>{
-                   console.log(response);
-               })
-                .catch(error=>{
-               console.log(error);
-               }) 
-           },
+           
            getScrap_tw(){
               let buscador=this.buscador;
               this.loading = true;
