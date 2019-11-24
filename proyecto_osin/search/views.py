@@ -586,7 +586,10 @@ def gettrending(request):
 
 #@login_required(login_url="/accounts/login")
 def getsocial(request):
-
+    geocoder=request.GET.get('geocoder')
+    kilometro=request.GET.get('kilometro')
+    palabra=request.GET.get('palabra')
+    
     consumer_key = '1laQ5JsXO0VnshtzI2hCEAUai'
     consumer_secret = 'fMX0PozHntGJA4dO7mQFYfhzTwXPcrjPvquf0QT2KfX0ur5z4M'
     access_token = '1193413476355584000-rXBVVxMzsguHuAgr66u6P8YTt4LkbJ'
