@@ -61,8 +61,18 @@
             <i class="fa fa-search"></i> Buscar
           </button>
         </div>
+
         <div class="form-group" v-show="loading">
           <i class="fa fa-spinner fa-spin" style="font-size:48px"></i> Cargando....
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="form-group">
+          <button class="btn btn-raised btn-primary" type="button" v-on:click.prevent="getexport()">
+            <i class="fa fa-search"></i> Exportar
+          </button>
         </div>
       </div>
     </div>
@@ -135,6 +145,7 @@
 import swal from "sweetalert";
 import moment from "moment";
 import "moment/locale/es";
+import XLSX from "xlsx";
 var tokent = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 var config = {
   headers: { "X-CSRFToken": tokent }
@@ -158,6 +169,7 @@ export default {
   data() {
     return {
       listaTweet: [],
+      dataTweet: [],
       geocoder: "",
       palabra: "",
       kilometro: "",
@@ -204,6 +216,57 @@ export default {
           console.log(response);
           this.listaTweet = response.data;
           this.loading = false;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    getexport() {
+      let geocoder = this.geocoder;
+      let kilometro = this.kilometro;
+      let palabra = this.palabra;
+      let f_inicio = this.f_inicio;
+      let f_fin = this.f_fin;
+      this.loading = true;
+      axios
+        .get(
+          "http://127.0.0.1:8000/search/getsocial",
+          {
+            params: {
+              geocoder: geocoder,
+              kilometro: kilometro,
+              palabra: palabra,
+              f_inicio: f_inicio,
+              f_fin: f_fin
+            }
+          },
+          config2
+        )
+        .then(response => {
+          console.log(response);
+          var data = [];
+          for (var element of response.data) {
+            //console.log(element);
+            var result = {};
+            result["id"] = element.id_str;
+            result["texto"] = element.full_text;
+            result["NombreUsuario"] = element.user && element.user.name;
+            result["Username"] = element.user && element.user.screen_name;
+            result["Direccion"] = element.user && element.user.location;
+            result["Descripcion"] = element.user && element.user.description;
+            result["Imagen"] =
+              element.user && element.user.profile_background_image_url_https;
+            data.push(result);
+          }
+          //console.log(data);
+          this.loading = false;
+          if (data.length > 0) {
+            let excel = XLSX.utils.json_to_sheet(data);
+            const workbook = XLSX.utils.book_new();
+            const filename = "dev-tweets";
+            XLSX.utils.book_append_sheet(workbook, excel, filename);
+            XLSX.writeFile(workbook, `${filename}.xlsx`);
+          }
         })
         .catch(error => {
           console.log(error);
