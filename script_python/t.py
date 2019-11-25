@@ -8,7 +8,7 @@ consumer_secret = 'fMX0PozHntGJA4dO7mQFYfhzTwXPcrjPvquf0QT2KfX0ur5z4M'
 access_token = '1193413476355584000-rXBVVxMzsguHuAgr66u6P8YTt4LkbJ'
 access_secret = 'lsKMRgmKHwG8oYElPznV5oa2RZyyMNh9yCXmFjfaHa65v'
 
-file = open("C:\\Users\\pc\\Desktop\\script_python\\Output_omarsh2.csv", "w")
+file = open("C:\\Users\\pc\\Desktop\\script_python\\Output_dev.csv", "w")
 file.write("X,Y,Id,Nombre,Username,Location,\n")
 
 data_list = []
