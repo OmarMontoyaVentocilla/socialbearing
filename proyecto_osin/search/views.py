@@ -606,7 +606,7 @@ def getsocial(request):
     if(palabra!='' and geocoder!='' and kilometro!='' and f_inicio!='' and f_fin!=''):
         print("entra aqui 1")
         geocode="{},{}km".format(geocoder,kilometro)
-        tweets = tweepy.Cursor(api.search,q=palabra,lang="es",geocode=geocode,since=f_inicio,until=f_fin).items(200)
+        tweets = tweepy.Cursor(api.search,q=palabra,lang="es",geocode=geocode,since=f_inicio,until=f_fin,tweet_mode='extended').items(300)
         response=[]
         responses=[]
         for i,tweet in enumerate(tweets):
@@ -617,7 +617,7 @@ def getsocial(request):
         return HttpResponse(data,content_type="application/json")
     elif(palabra!='' and geocoder=='' and kilometro=='' and f_inicio=='' and f_fin==''):
         print("entra aqui 2")
-        tweets = tweepy.Cursor(api.search,q=palabra,lang="es").items(200)
+        tweets = tweepy.Cursor(api.search,q=palabra,lang="es",tweet_mode='extended').items(300)
         response=[]
         responses=[]
         for i,tweet in enumerate(tweets):
@@ -630,7 +630,7 @@ def getsocial(request):
         print("entra aqui 3")
         geocode="{},{}km".format(geocoder,kilometro)
         print(geocode)
-        tweets = tweepy.Cursor(api.search,q=palabra,lang="es",geocode=geocode).items(200)
+        tweets = tweepy.Cursor(api.search,q=palabra,lang="es",geocode=geocode,tweet_mode='extended').items(300)
         response=[]
         responses=[]
         for i,tweet in enumerate(tweets):

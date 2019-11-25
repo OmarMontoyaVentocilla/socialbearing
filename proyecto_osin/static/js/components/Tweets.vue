@@ -66,10 +66,75 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="panel panel-success panel_estilo">
+          <div class="panel-body div1 table-responsive">
+            <table
+              class="table table-bordered table-hover table-fixed table-striped"
+              style="background:white;"
+            >
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Datos</th>
+                </tr>
+              </thead>
+              <tbody>
+                <template v-if="listaTweet!=''">
+                  <tr v-for="(list,index) in listaTweet">
+                    <td>{{list.id_str}}</td>
+                    <td>
+                      <table class="table table-bordered">
+                        <tr>
+                          <td rowspan="6" class="estilo_wi_rows">
+                            <img :src="list.user.profile_image_url_https" />
+                          </td>
+                          <td class="nombre_info">{{list.user.name}}</td>
+                        </tr>
+                        <tr>
+                          <td class>{{list.full_text}}</td>
+                        </tr>
+                        <tr>
+                          <td class="nombre_link">
+                            <a
+                              :href="list.user.screen_name"
+                              target="_blank"
+                            >Usuario: {{"https://twitter.com/"+list.user.screen_name}}</a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="nombre_info">Dirección: {{list.user.location}}</td>
+                        </tr>
+                        <tr>
+                          <td class="nombre_info">Descripción: {{list.user.description}}</td>
+                        </tr>
+                        <tr>
+                          <td
+                            class="nombre_info"
+                          >Fecha de creación: {{format_date(list.created_at)}}</td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </template>
+                <template v-else>
+                  <tr>
+                    <td colspan="3" align="center">No hay resultados disponibles</td>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 import swal from "sweetalert";
+import moment from "moment";
+import "moment/locale/es";
 var tokent = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 var config = {
   headers: { "X-CSRFToken": tokent }
@@ -111,6 +176,9 @@ export default {
         timer: 1500
       });
     },
+    format_date(fecha) {
+      return moment(fecha).format("LLLL");
+    },
     getocial() {
       let geocoder = this.geocoder;
       let kilometro = this.kilometro;
@@ -134,6 +202,7 @@ export default {
         )
         .then(response => {
           console.log(response);
+          this.listaTweet = response.data;
           this.loading = false;
         })
         .catch(error => {
@@ -143,3 +212,61 @@ export default {
   }
 };
 </script>
+<style scoped>
+.table-bordered,
+.table-bordered > tbody > tr > td,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > td,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > thead > tr > th {
+  border: 1px solid #afa8a8;
+}
+
+.panel.panel-success.panel_estilo {
+  border: 1px solid #2a3f54;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  width: 80%;
+  margin: auto;
+}
+
+table.table.table-bordered.tablita {
+  box-shadow: 0px 2px 8px 3px rgba(0, 0, 0, 0.75);
+}
+
+td.estilo_wi_rows {
+  width: 124px;
+}
+
+td.nombre_info {
+  color: black;
+  font-size: 15px;
+}
+
+td.nombre_link a {
+  color: #2a3f54;
+}
+
+.div1 {
+  overflow-y: scroll;
+  height: 400px;
+  width: 100%;
+  background: #ecf0f5;
+}
+
+.div1 table {
+  width: 100%;
+}
+
+td.info_style {
+  background: #15202a;
+  color: white;
+}
+
+thead {
+  background: #2a3f54;
+  color: white;
+}
+</style>
