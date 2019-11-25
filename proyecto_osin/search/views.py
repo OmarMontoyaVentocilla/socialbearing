@@ -589,6 +589,8 @@ def getsocial(request):
     geocoder=request.GET.get('geocoder')
     kilometro=request.GET.get('kilometro')
     palabra=request.GET.get('palabra')
+    f_inicio=request.GET.get('f_inicio')
+    f_fin=request.GET.get('f_fin')
     
     consumer_key = '1laQ5JsXO0VnshtzI2hCEAUai'
     consumer_secret = 'fMX0PozHntGJA4dO7mQFYfhzTwXPcrjPvquf0QT2KfX0ur5z4M'
@@ -597,19 +599,52 @@ def getsocial(request):
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_secret)
     api = tweepy.API(auth,wait_on_rate_limit=True,wait_on_rate_limit_notify=True)
-    search_words = "libra"
-    geocode="-33.602131,-70.576876,100000km"
-    date_since = "2019-11-16"
+    #search_words = "libra"
+    #geocode="-33.602131,-70.576876,100000km"
+    #date_since = "2019-11-16"
     #tweets = tweepy.Cursor(api.search,q=search_words,lang="es",geocode=geocode,since=date_since,tweet_mode='extended').items(100)
-    tweets = tweepy.Cursor(api.search,q=search_words,lang="es",since="2019-11-08",until="2019-11-16").items(200)
-    response=[]
-    responses=[]
-    for i,tweet in enumerate(tweets):
-        response.append(tweet)
-        datax=response[i]._json
-        responses.append(datax)
-    data=json.dumps(responses)
-    return HttpResponse(data,content_type="application/json")
+    if(palabra!='' and geocoder!='' and kilometro!='' and f_inicio!='' and f_fin!=''):
+        print("entra aqui 1")
+        geocode="{},{}km".format(geocoder,kilometro)
+        tweets = tweepy.Cursor(api.search,q=palabra,lang="es",geocode=geocode,since=f_inicio,until=f_fin).items(200)
+        response=[]
+        responses=[]
+        for i,tweet in enumerate(tweets):
+            response.append(tweet)
+            datax=response[i]._json
+            responses.append(datax)
+        data=json.dumps(responses)
+        return HttpResponse(data,content_type="application/json")
+    elif(palabra!='' and geocoder=='' and kilometro=='' and f_inicio=='' and f_fin==''):
+        print("entra aqui 2")
+        tweets = tweepy.Cursor(api.search,q=palabra,lang="es").items(200)
+        response=[]
+        responses=[]
+        for i,tweet in enumerate(tweets):
+            response.append(tweet)
+            datax=response[i]._json
+            responses.append(datax)
+        data=json.dumps(responses)
+        return HttpResponse(data,content_type="application/json")
+    elif(palabra!='' and geocoder!='' and kilometro!='' and f_inicio=='' and f_fin==''):
+        print("entra aqui 3")
+        geocode="{},{}km".format(geocoder,kilometro)
+        print(geocode)
+        tweets = tweepy.Cursor(api.search,q=palabra,lang="es",geocode=geocode).items(200)
+        response=[]
+        responses=[]
+        for i,tweet in enumerate(tweets):
+            response.append(tweet)
+            datax=response[i]._json
+            responses.append(datax)
+        data=json.dumps(responses)
+        return HttpResponse(data,content_type="application/json")
+    else:
+        print("entra aqui 4")
+        responses=[]
+        data=json.dumps(responses)
+        return HttpResponse(data,content_type="application/json")
+
 
 @login_required(login_url="/accounts/login")
 def getsocialUser(request):
