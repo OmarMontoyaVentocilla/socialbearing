@@ -625,6 +625,7 @@ def getsocial(request):
         responses=[]
         retweetsC=[]
         sourceAll=[]
+        domainAll=[]
         favoritesC=[]
         timeAll=[] 
         repliesC=[]
@@ -634,6 +635,7 @@ def getsocial(request):
             responses.append(datax)
             retweetsC.append(tweet.retweet_count)
             sourceAll.append(tweet.source)
+            domainAll.append(tweet.user.url)
             timeAll.append(tweet.created_at.strftime("%H:%M %p"))
             favoritesC.append(tweet.user.favourites_count)
             repliesC.append(tweet.in_reply_to_status_id_str)
@@ -659,6 +661,7 @@ def getsocial(request):
         for i in favoritesC:
             sumaFav=sumaFav+i
         odd_num=len(list(filter(lambda x: x!='null' and x!=None, repliesC)))
+        domain=list(filter(lambda x: x!='null' and x!=None, domainAll))
         ####filtrar x #
         hastag=list(filter(lambda x: '#' in x , merged_list))
         countHastag=len(list(filter(lambda x: '#' in x , merged_list)))
@@ -673,6 +676,8 @@ def getsocial(request):
         palabraListMasRepetidos=contarElementosLista(palabraList)
         ####FILTRAR POR IPHONE
         resultado_time=contarElementosLista(timeAll)
+        ######
+        socurceMerge=contarElementosLista(sourceAll)
         xxxx={
             "data":responses,
             "sizeCount":size,
@@ -691,7 +696,9 @@ def getsocial(request):
             "palabraList":palabraList,
             "palabraListMasRepetidos":palabraListMasRepetidos,
             "sourceAll":sourceAll,
-            "timeObject":resultado_time
+            "socurceMerge":socurceMerge,
+            "timeObject":resultado_time,
+            "domainAll":domain
         }
         data=json.dumps(xxxx)
         return HttpResponse(data,content_type="application/json")
