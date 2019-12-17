@@ -15,6 +15,9 @@ from .models import Instagram
 from .models import PersonaRedes
 from .forms import AutoForm
 from fullcontact import FullContact
+import random
+import datetime
+import operator
 import urllib.request
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -583,6 +586,8 @@ def gettrending(request):
     data={'info_trending':response}
     return JsonResponse(data) 
 
+def contarElementosLista(lista):
+    return {i:lista.count(i) for i in lista}
 
 #@login_required(login_url="/accounts/login")
 def getsocial(request):
@@ -591,7 +596,7 @@ def getsocial(request):
     palabra=request.GET.get('palabra')
     f_inicio=request.GET.get('f_inicio')
     f_fin=request.GET.get('f_fin')
-    
+    palabraBuscar="chile"
     consumer_key = '1laQ5JsXO0VnshtzI2hCEAUai'
     consumer_secret = 'fMX0PozHntGJA4dO7mQFYfhzTwXPcrjPvquf0QT2KfX0ur5z4M'
     access_token = '1193413476355584000-rXBVVxMzsguHuAgr66u6P8YTt4LkbJ'
@@ -599,10 +604,6 @@ def getsocial(request):
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_secret)
     api = tweepy.API(auth,wait_on_rate_limit=True,wait_on_rate_limit_notify=True)
-    #search_words = "libra"
-    #geocode="-33.602131,-70.576876,100000km"
-    #date_since = "2019-11-16"
-    #tweets = tweepy.Cursor(api.search,q=search_words,lang="es",geocode=geocode,since=date_since,tweet_mode='extended').items(100)
     if(palabra!='' and geocoder!='' and kilometro!='' and f_inicio!='' and f_fin!=''):
         print("entra aqui 1")
         geocode="{},{}km".format(geocoder,kilometro)
@@ -613,18 +614,86 @@ def getsocial(request):
             response.append(tweet)
             datax=response[i]._json
             responses.append(datax)
+        
         data=json.dumps(responses)
         return HttpResponse(data,content_type="application/json")
     elif(palabra!='' and geocoder=='' and kilometro=='' and f_inicio=='' and f_fin==''):
         print("entra aqui 2")
         tweets = tweepy.Cursor(api.search,q=palabra,lang="es",tweet_mode='extended').items(300)
         response=[]
+        fullTextResponse=[]
         responses=[]
+        retweetsC=[]
+        sourceAll=[]
+        favoritesC=[]
+        timeAll=[] 
+        repliesC=[]
         for i,tweet in enumerate(tweets):
             response.append(tweet)
             datax=response[i]._json
             responses.append(datax)
-        data=json.dumps(responses)
+            retweetsC.append(tweet.retweet_count)
+            sourceAll.append(tweet.source)
+            timeAll.append(tweet.created_at.strftime("%H:%M %p"))
+            favoritesC.append(tweet.user.favourites_count)
+            repliesC.append(tweet.in_reply_to_status_id_str)
+            fullTextResponse.append(tweet.full_text)
+            
+        size=len(responses)
+        ##splietand arrays
+        arrayPalabra=[]
+        for i,text in enumerate(fullTextResponse):
+            arrayPalabra.append(text.split())
+        merged_list = [] 
+        for l in arrayPalabra:
+            merged_list += l
+        resultado_merge=contarElementosLista(merged_list)
+        #valores_ord = {k: v for k, v in sorted(resultado_merge.items(),key=operator.itemgetter(1))}   
+        ####random
+        timefr='{}{}'.format(random.randint(0, 5),"m")
+        #####hallar la suma de reteets count y favouyrites count 
+        sumaRC=0
+        sumaFav=0
+        for i in retweetsC:
+            sumaRC=sumaRC+i
+        for i in favoritesC:
+            sumaFav=sumaFav+i
+        odd_num=len(list(filter(lambda x: x!='null' and x!=None, repliesC)))
+        ####filtrar x #
+        hastag=list(filter(lambda x: '#' in x , merged_list))
+        countHastag=len(list(filter(lambda x: '#' in x , merged_list)))
+        hastagMasRepetidos=contarElementosLista(hastag)
+        ###filtrar x usuario mencionados
+        userMencion=list(filter(lambda x: '@' in x , merged_list))
+        countUser=len(list(filter(lambda x: '@' in x , merged_list)))
+        usersMasRepetidos=contarElementosLista(userMencion)
+        ##filtrar x hora 
+        ####palabra si existe
+        palabraList=list(filter(lambda x: palabraBuscar in x , merged_list))
+        palabraListMasRepetidos=contarElementosLista(palabraList)
+        ####FILTRAR POR IPHONE
+        resultado_time=contarElementosLista(timeAll)
+        xxxx={
+            "data":responses,
+            "sizeCount":size,
+            "retweetsCount":sumaRC,
+            "favCount":sumaFav,
+            "timeframes":timefr,
+            "repliesCount":odd_num,
+            "fullTextResponse":fullTextResponse,     
+            "words":merged_list,
+            "hastag":hastag,
+            "countHastag":countHastag,
+            "hastagMasRepetidos":hastagMasRepetidos,
+            "userMencion":userMencion,
+            "countUser":countUser,
+            "usersMasRepetidos":usersMasRepetidos,
+            "palabraList":palabraList,
+            "palabraListMasRepetidos":palabraListMasRepetidos,
+            "sourceAll":sourceAll,
+            "timeObject":resultado_time
+        }
+        data=json.dumps(xxxx)
         return HttpResponse(data,content_type="application/json")
     elif(palabra!='' and geocoder!='' and kilometro!='' and f_inicio=='' and f_fin==''):
         print("entra aqui 3")
@@ -645,6 +714,14 @@ def getsocial(request):
         data=json.dumps(responses)
         return HttpResponse(data,content_type="application/json")
 
+
+@login_required(login_url="/accounts/login")
+def getTotalRetwwets(responses):
+    data=[]
+    for i in responses:
+        data.append(i)
+    return data
+    print(data)
 
 @login_required(login_url="/accounts/login")
 def getsocialUser(request):
