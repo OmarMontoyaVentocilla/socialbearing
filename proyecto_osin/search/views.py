@@ -597,6 +597,11 @@ def getsocial(request):
     f_inicio=request.GET.get('f_inicio')
     f_fin=request.GET.get('f_fin')
     palabraBuscar="chile"
+    great="si"
+    good="gracias"
+    neutral="que"
+    bad="no"
+    terrible="malo"
     consumer_key = '1laQ5JsXO0VnshtzI2hCEAUai'
     consumer_secret = 'fMX0PozHntGJA4dO7mQFYfhzTwXPcrjPvquf0QT2KfX0ur5z4M'
     access_token = '1193413476355584000-rXBVVxMzsguHuAgr66u6P8YTt4LkbJ'
@@ -678,9 +683,23 @@ def getsocial(request):
         resultado_time=contarElementosLista(timeAll)
         ######
         socurceMerge=contarElementosLista(sourceAll)
+        #####bueno
+        greatListC=len(list(filter(lambda x: great in x , merged_list)))
+        goodListC=len(list(filter(lambda x: good in x , merged_list)))
+        neutralListC=len(list(filter(lambda x: neutral in x , merged_list)))
+        badListC=len(list(filter(lambda x: bad in x , merged_list)))
+        terribleListC=len(list(filter(lambda x: terrible in x , merged_list)))
+        sentimiento={
+            "great":greatListC,
+            "good":goodListC,
+            "neutral":neutralListC,
+            "bad":badListC,
+            "terrible":terribleListC
+        }
+        
         xxxx={
             "data":responses,
-            "sizeCount":size,
+            "CountTwets":size,
             "retweetsCount":sumaRC,
             "favCount":sumaFav,
             "timeframes":timefr,
@@ -695,10 +714,11 @@ def getsocial(request):
             "usersMasRepetidos":usersMasRepetidos,
             "palabraList":palabraList,
             "palabraListMasRepetidos":palabraListMasRepetidos,
-            "sourceAll":sourceAll,
-            "socurceMerge":socurceMerge,
-            "timeObject":resultado_time,
-            "domainAll":domain
+            "sourceAllDispositive":sourceAll,
+            "socurceMergeDispositive":socurceMerge,
+            "time":resultado_time,
+            "domainAll":domain,
+            "sentimiento":sentimiento
         }
         data=json.dumps(xxxx)
         return HttpResponse(data,content_type="application/json")
