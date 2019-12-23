@@ -231,7 +231,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row well">
       <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
         <div id="content">
           <canvas ref="chart"></canvas>
@@ -250,7 +250,7 @@
     <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
       <p class="text-lat text-center">Análisis por tiempo</p>
     </div>
-    <div class="row">
+    <div class="row well">
       <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
         <div id="content3">
           <canvas ref="chart3"></canvas>
