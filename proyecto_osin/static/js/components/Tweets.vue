@@ -223,16 +223,14 @@
     </div>
     <br /><br /><br />
     <div class="row">
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+      <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
         <p class="text-lat text-center">Análisis de sentimiento</p>
       </div>
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+      <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
         <p class="text-lat text-center">Análisis por tipo</p>
       </div>
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-        <p class="text-lat text-center">Análisis por dispositivo</p>
-      </div>
     </div>
+
     <div class="row">
       <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
         <div id="content">
@@ -246,13 +244,19 @@
       </div>
     </div>
     <br /><br /><br />
+    <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
+      <p class="text-lat text-center">Análisis por dispositivo</p>
+    </div>
+    <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
+      <p class="text-lat text-center">Análisis por tiempo</p>
+    </div>
     <div class="row">
       <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
         <div id="content3">
           <canvas ref="chart3"></canvas>
         </div>
       </div>
-       <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
+      <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
         <div id="content4">
           <canvas ref="chart4"></canvas>
         </div>
