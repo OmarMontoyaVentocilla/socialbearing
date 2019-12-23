@@ -615,13 +615,94 @@ def getsocial(request):
         geocode="{},{}km".format(geocoder,kilometro)
         tweets = tweepy.Cursor(api.search,q=palabra,lang="es",geocode=geocode,since=f_inicio,until=f_fin,tweet_mode='extended').items(300)
         response=[]
+        fullTextResponse=[]
         responses=[]
+        retweetsC=[]
+        sourceAll=[]
+        domainAll=[]
+        favoritesC=[]
+        timeAll=[] 
+        repliesC=[]
         for i,tweet in enumerate(tweets):
             response.append(tweet)
             datax=response[i]._json
             responses.append(datax)
-        
-        data=json.dumps(responses)
+            retweetsC.append(tweet.retweet_count)
+            sourceAll.append(tweet.source)
+            domainAll.append(tweet.user.url)
+            timeAll.append(tweet.created_at.strftime("%H:%M %p"))
+            favoritesC.append(tweet.user.favourites_count)
+            repliesC.append(tweet.in_reply_to_status_id_str)
+            fullTextResponse.append(tweet.full_text)
+            
+        size=len(responses)
+        ##splietand arrays
+        arrayPalabra=[]
+        for i,text in enumerate(fullTextResponse):
+            arrayPalabra.append(text.split())
+        merged_list = [] 
+        for l in arrayPalabra:
+            merged_list += l
+        resultado_merge=contarElementosLista(merged_list)
+        #valores_ord = {k: v for k, v in sorted(resultado_merge.items(),key=operator.itemgetter(1))}   
+        ####random
+        timefr='{}{}'.format(random.randint(0, 5),"m")
+        #####hallar la suma de reteets count y favouyrites count 
+        sumaRC=0
+        sumaFav=0
+        for i in retweetsC:
+            sumaRC=sumaRC+i
+        for i in favoritesC:
+            sumaFav=sumaFav+i
+        odd_num=len(list(filter(lambda x: x!='null' and x!=None, repliesC)))
+        domain=list(filter(lambda x: x!='null' and x!=None, domainAll))
+        ####filtrar x #
+        hastag=list(filter(lambda x: '#' in x , merged_list))
+        countHastag=len(list(filter(lambda x: '#' in x , merged_list)))
+        hastagMasRepetidos=contarElementosLista(hastag)
+        ###filtrar x usuario mencionados
+        userMencion=list(filter(lambda x: '@' in x , merged_list))
+        countUser=len(list(filter(lambda x: '@' in x , merged_list)))
+        usersMasRepetidos=contarElementosLista(userMencion)
+        ##filtrar x hora 
+        ####palabra si existe
+        palabraList=list(filter(lambda x: palabraBuscar in x , merged_list))
+        palabraListMasRepetidos=contarElementosLista(palabraList)
+        ####FILTRAR POR IPHONE
+        resultado_time=contarElementosLista(timeAll)
+        ######
+        socurceMerge=contarElementosLista(sourceAll)
+        #####bueno
+        greatListC=len(list(filter(lambda x: great in x , merged_list)))
+        goodListC=len(list(filter(lambda x: good in x , merged_list)))
+        neutralListC=len(list(filter(lambda x: neutral in x , merged_list)))
+        badListC=len(list(filter(lambda x: bad in x , merged_list)))
+        terribleListC=len(list(filter(lambda x: terrible in x , merged_list)))
+        sentimiento=[greatListC,goodListC,neutralListC,badListC,terribleListC],
+        xxxx={
+            "data":responses,
+            "CountTwets":size,
+            "retweetsCount":sumaRC,
+            "favCount":sumaFav,
+            "timeframes":timefr,
+            "repliesCount":odd_num,
+            "fullTextResponse":fullTextResponse,     
+            "words":merged_list,
+            "hastag":hastag,
+            "countHastag":countHastag,
+            "hastagMasRepetidos":hastagMasRepetidos,
+            "userMencion":userMencion,
+            "countUser":countUser,
+            "usersMasRepetidos":usersMasRepetidos,
+            "palabraList":palabraList,
+            "palabraListMasRepetidos":palabraListMasRepetidos,
+            "sourceAllDispositive":sourceAll,
+            "socurceMergeDispositive":socurceMerge,
+            "time":resultado_time,
+            "domainAll":domain,
+            "sentimiento":sentimiento
+        }
+        data=json.dumps(xxxx)
         return HttpResponse(data,content_type="application/json")
     elif(palabra!='' and geocoder=='' and kilometro=='' and f_inicio=='' and f_fin==''):
         print("entra aqui 2")
@@ -722,12 +803,94 @@ def getsocial(request):
         print(geocode)
         tweets = tweepy.Cursor(api.search,q=palabra,lang="es",geocode=geocode,tweet_mode='extended').items(300)
         response=[]
+        fullTextResponse=[]
         responses=[]
+        retweetsC=[]
+        sourceAll=[]
+        domainAll=[]
+        favoritesC=[]
+        timeAll=[] 
+        repliesC=[]
         for i,tweet in enumerate(tweets):
             response.append(tweet)
             datax=response[i]._json
             responses.append(datax)
-        data=json.dumps(responses)
+            retweetsC.append(tweet.retweet_count)
+            sourceAll.append(tweet.source)
+            domainAll.append(tweet.user.url)
+            timeAll.append(tweet.created_at.strftime("%H:%M %p"))
+            favoritesC.append(tweet.user.favourites_count)
+            repliesC.append(tweet.in_reply_to_status_id_str)
+            fullTextResponse.append(tweet.full_text)
+            
+        size=len(responses)
+        ##splietand arrays
+        arrayPalabra=[]
+        for i,text in enumerate(fullTextResponse):
+            arrayPalabra.append(text.split())
+        merged_list = [] 
+        for l in arrayPalabra:
+            merged_list += l
+        resultado_merge=contarElementosLista(merged_list)
+        #valores_ord = {k: v for k, v in sorted(resultado_merge.items(),key=operator.itemgetter(1))}   
+        ####random
+        timefr='{}{}'.format(random.randint(0, 5),"m")
+        #####hallar la suma de reteets count y favouyrites count 
+        sumaRC=0
+        sumaFav=0
+        for i in retweetsC:
+            sumaRC=sumaRC+i
+        for i in favoritesC:
+            sumaFav=sumaFav+i
+        odd_num=len(list(filter(lambda x: x!='null' and x!=None, repliesC)))
+        domain=list(filter(lambda x: x!='null' and x!=None, domainAll))
+        ####filtrar x #
+        hastag=list(filter(lambda x: '#' in x , merged_list))
+        countHastag=len(list(filter(lambda x: '#' in x , merged_list)))
+        hastagMasRepetidos=contarElementosLista(hastag)
+        ###filtrar x usuario mencionados
+        userMencion=list(filter(lambda x: '@' in x , merged_list))
+        countUser=len(list(filter(lambda x: '@' in x , merged_list)))
+        usersMasRepetidos=contarElementosLista(userMencion)
+        ##filtrar x hora 
+        ####palabra si existe
+        palabraList=list(filter(lambda x: palabraBuscar in x , merged_list))
+        palabraListMasRepetidos=contarElementosLista(palabraList)
+        ####FILTRAR POR IPHONE
+        resultado_time=contarElementosLista(timeAll)
+        ######
+        socurceMerge=contarElementosLista(sourceAll)
+        #####bueno
+        greatListC=len(list(filter(lambda x: great in x , merged_list)))
+        goodListC=len(list(filter(lambda x: good in x , merged_list)))
+        neutralListC=len(list(filter(lambda x: neutral in x , merged_list)))
+        badListC=len(list(filter(lambda x: bad in x , merged_list)))
+        terribleListC=len(list(filter(lambda x: terrible in x , merged_list)))
+        sentimiento=[greatListC,goodListC,neutralListC,badListC,terribleListC],
+        xxxx={
+            "data":responses,
+            "CountTwets":size,
+            "retweetsCount":sumaRC,
+            "favCount":sumaFav,
+            "timeframes":timefr,
+            "repliesCount":odd_num,
+            "fullTextResponse":fullTextResponse,     
+            "words":merged_list,
+            "hastag":hastag,
+            "countHastag":countHastag,
+            "hastagMasRepetidos":hastagMasRepetidos,
+            "userMencion":userMencion,
+            "countUser":countUser,
+            "usersMasRepetidos":usersMasRepetidos,
+            "palabraList":palabraList,
+            "palabraListMasRepetidos":palabraListMasRepetidos,
+            "sourceAllDispositive":sourceAll,
+            "socurceMergeDispositive":socurceMerge,
+            "time":resultado_time,
+            "domainAll":domain,
+            "sentimiento":sentimiento
+        }
+        data=json.dumps(xxxx)
         return HttpResponse(data,content_type="application/json")
     else:
         print("entra aqui 4")

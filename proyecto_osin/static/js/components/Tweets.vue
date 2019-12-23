@@ -137,6 +137,30 @@
           />
         </div>
       </div>
+      <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3">
+        <div class="form-group">
+          <label for="f_inicio" class="bmd-label-floating">Fecha Inicio:</label>
+          <input
+            type="date"
+            class="form-control"
+            name="f_inicio"
+            id="f_inicio"
+            v-model="f_inicio"
+          />
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3">
+        <div class="form-group">
+          <label for="f_inicio" class="bmd-label-floating">Fecha Fin:</label>
+          <input
+            type="date"
+            class="form-control"
+            name="f_fin"
+            id="f_fin"
+            v-model="f_fin"
+          />
+        </div>
+      </div>
     </div>
     <div class="row">
       <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
@@ -244,11 +268,13 @@
       </div>
     </div>
     <br /><br /><br />
-    <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
-      <p class="text-lat text-center">Análisis por dispositivo</p>
-    </div>
-    <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
-      <p class="text-lat text-center">Análisis por tiempo</p>
+    <div class="row well">
+      <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
+        <p class="text-lat text-center">Análisis por dispositivo</p>
+      </div>
+      <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
+        <p class="text-lat text-center">Análisis por tiempo</p>
+      </div>
     </div>
     <div class="row well">
       <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
@@ -262,16 +288,128 @@
         </div>
       </div>
     </div>
-    <!-- <div class="row">
+    <div class="row well">
+      <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
+        <p class="text-lat text-center">Hastag Cloud</p>
+      </div>
+      <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
+        <p class="text-lat text-center">Top Dominios</p>
+      </div>
+    </div>
+    <div class="row well">
+      <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4 text-center">
+        <div id="content5">
+          <canvas ref="chart5"></canvas>
+        </div>
+        <!-- <a class="btn btn-primary" href="#open-modal">
+          Ver
+        </a> -->
+        <!-- <div id="open-modal" class="modal-window">
+  <div>
+    <a href="#" title="Close" class="modal-close">Cerrar</a>
+    <h1>Hastag Cloud</h1>
+    <div>
+      ds
+    </div>
+   
+    </div>
+    </div> -->
+      </div>
+      <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4 text-center">
+        <!-- <button
+          type="button"
+          class="btn btn-primary"
+          data-toggle="modal"
+          data-target="#dominio"
+        >
+          Ver
+        </button> -->
+      </div>
+    </div>
+    <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="form-group">
-          <button class="btn btn-raised btn-primary" type="button" v-on:click.prevent="getexport()">
-            <i class="fa fa-search"></i> Exportar
-          </button>
+        <div class="panel panel-success panel_estilo">
+          <div class="panel-body div1 table-responsive">
+            <table
+              class="table table-bordered table-hover table-fixed table-striped"
+              style="background:white;"
+            >
+              <thead>
+                <tr>
+                  <!-- <th>#</th> -->
+                  <th>Datos</th>
+                </tr>
+              </thead>
+              <tbody>
+                <template v-if="listaTweet != ''">
+                  <tr v-for="(list, index) in listaTweet.data">
+                    <!-- <td>{{ list.id_str }}</td> -->
+                    <td>
+                      <table class="table table-bordered">
+                        <tr>
+                          <td rowspan="6" class="estilo_wi_rows text-center">
+                            <img
+                              width="320px"
+                              :src="list.user && list.user.profile_image_url"
+                            />
+                          </td>
+                          <td class="nombre_info">
+                            {{ list.user && list.user.name }}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class>{{ list.full_text }}</td>
+                        </tr>
+                        <tr>
+                          <td class="nombre_link">
+                            <a
+                              :href="list.user && list.user.screen_name"
+                              target="_blank"
+                              >Usuario:
+                              {{
+                                "https://twitter.com/" + list.user &&
+                                  list.user.screen_name
+                              }}</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="nombre_info">
+                            Dirección: {{ list.user && list.user.location }}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="nombre_info">
+                            Descripción:
+                            {{ list.user && list.user.description }}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="nombre_info">
+                            Fecha de creación:
+                            {{ format_date(list.created_at) }}
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </template>
+                <template v-else>
+                  <tr>
+                    <td colspan="3" align="center">
+                      No hay resultados disponibles
+                    </td>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>-->
-    <!-- <div class="row">
+    </div>
+  </div>
+
+  <!-- <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="panel panel-success panel_estilo">
           <div class="panel-body div1 table-responsive">
@@ -334,7 +472,6 @@
         </div>
       </div>
     </div>-->
-  </div>
 </template>
 <script>
 import swal from "sweetalert";
@@ -377,6 +514,8 @@ export default {
     return {
       listaTweet: [],
       dataTweet: [],
+      listaItemCloud: [],
+      listaValueCloud: [],
       geocoder: "",
       palabra: "",
       kilometro: "",
@@ -454,6 +593,10 @@ export default {
           var SourceObjectV = Object.values(
             response.data.socurceMergeDispositive
           );
+
+          var HastagObjectI = Object.keys(response.data.hastagMasRepetidos);
+          var HastagObjectV = Object.keys(response.data.hastagMasRepetidos);
+
           //TIME
           var timeObjectI = Object.keys(response.data.time);
           var timeObjectV = Object.values(response.data.time);
@@ -465,10 +608,12 @@ export default {
           var chart2 = this.$refs.chart2;
           var chart3 = this.$refs.chart3;
           var chart4 = this.$refs.chart4;
+          var chart5 = this.$refs.chart5;
           var ctx = chart.getContext("2d");
           var ctx2 = chart2.getContext("2d");
           var ctx3 = chart3.getContext("2d");
           var ctx4 = chart4.getContext("2d");
+          var ctx5 = chart5.getContext("2d");
           var myChart = new Chart(ctx, {
             type: "bar",
             data: {
@@ -624,6 +769,40 @@ export default {
               }
             }
           });
+
+          var myChart5 = new Chart(ctx5, {
+            type: "line",
+            data: {
+              labels: HastagObjectI,
+              datasets: [
+                {
+                  label: "Hastag",
+                  data: HastagObjectV,
+                  lineTension: 0,
+                  backgroundColor: "transparent",
+                  borderColor: "orange",
+                  borderDash: [5, 5],
+                  pointBorderColor: "orange",
+                  pointBackgroundColor: "rgba(255,150,0,0.5)",
+                  pointRadius: 5,
+                  pointHoverRadius: 10,
+                  pointHitRadius: 30,
+                  pointBorderWidth: 2,
+                  pointStyle: "rectRounded"
+                }
+              ]
+            },
+            options: {
+              legend: {
+                display: true,
+                position: "top",
+                labels: {
+                  boxWidth: 80,
+                  fontColor: "black"
+                }
+              }
+            }
+          });
         })
         .catch(error => {
           console.log(error);
@@ -743,5 +922,59 @@ td.info_style {
 thead {
   background: #2a3f54;
   color: white;
+}
+
+.modal-window {
+  position: fixed;
+  background-color: hsla(0, 0%, 0%, 0.53);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+}
+.modal-window:target {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal-window > div {
+  width: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  padding: 2em;
+  background: #ffffff;
+}
+.modal-window header {
+  font-weight: bold;
+}
+.modal-window h1 {
+  font-size: 150%;
+  margin: 0 0 15px;
+}
+
+.modal-close {
+  color: #aaa;
+  line-height: 50px;
+  font-size: 80%;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 70px;
+  text-decoration: none;
+}
+.modal-close:hover {
+  color: black;
+}
+.modal-window div:not(:last-of-type) {
+  margin-bottom: 15px;
 }
 </style>
