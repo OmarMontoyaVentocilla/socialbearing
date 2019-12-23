@@ -597,11 +597,12 @@ def getsocial(request):
     f_inicio=request.GET.get('f_inicio')
     f_fin=request.GET.get('f_fin')
     palabraBuscar="chile"
-    great="si"
-    good="gracias"
-    neutral="que"
-    bad="no"
-    terrible="malo"
+    great=request.GET.get('great')
+    good=request.GET.get('good')
+    neutral=request.GET.get('neutral')
+    bad=request.GET.get('bad')
+    terrible=request.GET.get('terrible') 
+
     consumer_key = '1laQ5JsXO0VnshtzI2hCEAUai'
     consumer_secret = 'fMX0PozHntGJA4dO7mQFYfhzTwXPcrjPvquf0QT2KfX0ur5z4M'
     access_token = '1193413476355584000-rXBVVxMzsguHuAgr66u6P8YTt4LkbJ'
@@ -689,14 +690,7 @@ def getsocial(request):
         neutralListC=len(list(filter(lambda x: neutral in x , merged_list)))
         badListC=len(list(filter(lambda x: bad in x , merged_list)))
         terribleListC=len(list(filter(lambda x: terrible in x , merged_list)))
-        sentimiento={
-            "great":greatListC,
-            "good":goodListC,
-            "neutral":neutralListC,
-            "bad":badListC,
-            "terrible":terribleListC
-        }
-        
+        sentimiento=[greatListC,goodListC,neutralListC,badListC,terribleListC],
         xxxx={
             "data":responses,
             "CountTwets":size,

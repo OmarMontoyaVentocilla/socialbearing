@@ -1,48 +1,49 @@
-var path = require('path');
-var webpack = require('webpack');
-var BundleTracker = require('webpack-bundle-tracker');
+var path = require("path");
+var webpack = require("webpack");
+var BundleTracker = require("webpack-bundle-tracker");
 module.exports = {
-    entry: ['./static/js/App.js', './static/js/custom.js'],
+    entry: ["./static/js/App.js", "./static/js/custom.js"],
     output: {
-        path: path.resolve(__dirname, './static/public'),
-        publicPath: '/static/public/',
-        filename: 'bundle.js'
+        path: path.resolve(__dirname, "./static/public"),
+        publicPath: "/static/public/",
+        filename: "bundle.js"
     },
-    plugins: [
-        new BundleTracker({ filename: './webpack-stats.json' }),
-    ],
+    plugins: [new BundleTracker({
+        filename: "./webpack-stats.json"
+    })],
     module: {
         rules: [{
                 test: /\.vue$/,
-                loader: 'vue-loader',
+                loader: "vue-loader",
                 options: {
                     loaders: {
                         // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
                         // the "scss" and "sass" values for the lang attribute to the right configs here.
                         // other preprocessors should work out of the box, no loader config like this necessary.
-                        'scss': 'vue-style-loader!css-loader!sass-loader',
-                        'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
+                        scss: "vue-style-loader!css-loader!sass-loader",
+                        sass: "vue-style-loader!css-loader!sass-loader?indentedSyntax"
                     }
                     // other vue-loader options go here
                 }
             },
             {
                 test: /\.js$/,
-                loader: 'babel-loader',
+                loader: "babel-loader",
                 exclude: /node_modules/
             },
             {
                 test: /\.(png|jpg|gif|svg)$/,
-                loader: 'file-loader',
+                loader: "file-loader",
                 options: {
-                    name: '[name].[ext]?[hash]'
+                    name: "[name].[ext]?[hash]"
                 }
             }
         ]
     },
     resolve: {
         alias: {
-            'vue': 'vue/dist/vue.js'
+            vue: "vue/dist/vue.js",
+            jquery: "jquery/src/jquery.js"
         }
     },
     devServer: {
@@ -52,12 +53,12 @@ module.exports = {
     performance: {
         hints: false
     },
-    devtool: '#eval-source-map'
-}
+    devtool: "#eval-source-map"
+};
 
 if (process.env.NODE_ENV === 'production') {
     module.exports.devtool = '#source-map'
-        // http://vue-loader.vuejs.org/en/workflow/production.html
+    // http://vue-loader.vuejs.org/en/workflow/production.html
     module.exports.plugins = (module.exports.plugins || []).concat([
         new webpack.DefinePlugin({
             'process.env': {
@@ -72,6 +73,13 @@ if (process.env.NODE_ENV === 'production') {
         }),
         new webpack.LoaderOptionsPlugin({
             minimize: true
+        })
+    ])
+} else {
+    module.exports.plugins = (module.exports.plugins || []).concat([
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery'
         })
     ])
 }

@@ -4,7 +4,7 @@ body {
 }
 
 .left_col {
-    background: #b9a88a
+    background: #32476f
 }
 
 .nav-sm .container.body .col-md-3.left_col {
@@ -220,7 +220,7 @@ body {
 
 .nav_menu {
     float: left;
-    background: #b9a88a;
+    background: #32476f;
     border-bottom: 1px solid #D9DEE4;
     margin-bottom: 10px;
     width: 100%;
@@ -266,18 +266,22 @@ body .container.body .right_col {
 }
 
 @media (max-width: 991px) {
+
     .nav-md .container.body .right_col,
     .nav-md .container.body .top_nav {
         width: 100%;
         margin: 0
     }
+
     .nav-md .container.body .col-md-3.left_col {
         display: none
     }
+
     .nav-md .container.body .right_col {
         width: 100%;
         padding-right: 0
     }
+
     .right_col {
         padding: 10px !important
     }
@@ -288,6 +292,7 @@ body .container.body .right_col {
         width: 62%;
         font-size: 17px
     }
+
     .tile,
     .graph {
         zoom: 85%;
@@ -594,7 +599,7 @@ h3,
 }
 
 a {
-    color: #141415;
+    color: #484141;
     text-decoration: none;
 }
 
@@ -739,7 +744,7 @@ a:focus {
 
 .nav.side-menu>li>a,
 .nav.child_menu>li>a {
-    color: #141415;
+    color: white;
     font-weight: 500
 }
 
@@ -785,7 +790,7 @@ a:focus {
 .navbar-brand,
 .navbar-nav>li>a {
     font-weight: 500;
-    color: #141415  !important;
+    color: #141415 !important;
     margin-left: 0 !important;
     line-height: 32px
 }
@@ -796,7 +801,7 @@ a:focus {
     font-weight: 400;
     font-size: 22px;
     width: 100%;
-    color: #141415  !important;
+    color: #141415 !important;
     margin-left: 0 !important;
     line-height: 59px;
     display: block;
@@ -811,7 +816,7 @@ a:focus {
 }
 
 .nav.navbar-nav>li>a {
-    color: #515356 !important
+    color: white !important
 }
 
 .nav.top_menu>li>a {
@@ -2516,6 +2521,7 @@ textarea:focus {
         margin-right: 0;
         margin-left: 0
     }
+
     .bs-glyphicons li {
         width: 12.5%;
         font-size: 12px
@@ -3411,7 +3417,6 @@ ul.project_files li a i {
     margin-bottom: 0;
 }
 
-
 /*!
  * bootstrap-vertical-tabs - v1.2.1
  * https://dbtek.github.io/bootstrap-vertical-tabs
@@ -3842,7 +3847,7 @@ form:after {
 .button {
     background: #f7f9fa;
     background: linear-gradient(top, #f7f9fa 0%, #f0f0f0 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#f7f9fa', endColorstr='#f0f0f0', GradientType=0);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#f7f9fa', endColorstr='#f0f0f0', GradientType=0);
     -ms-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
     -o-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
@@ -4094,10 +4099,12 @@ fieldset {
     .cropper .btn-group-crop {
         margin-right: -15px !important
     }
+
     .cropper .btn-group-crop>.btn {
         padding-left: 5px;
         padding-right: 5px
     }
+
     .cropper .btn-group-crop .docs-tooltip {
         margin-left: -5px;
         margin-right: -5px;
@@ -4548,7 +4555,6 @@ h2#nombreAdmin {
     color: #141415;
     font-size: 18px;
 }
-
 
 /*Sobrescribiendo los esilos*/
 
