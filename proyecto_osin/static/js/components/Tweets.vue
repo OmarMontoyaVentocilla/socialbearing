@@ -8,14 +8,10 @@
         </p>
 
         <p class="text-lat">
-          <a href="https://www.latlong.net/" target="_blank"
-            >Latitud y longitud</a
-          >
+          <a href="https://www.latlong.net/" target="_blank">Latitud y longitud</a>
         </p>
         <p class="text-lat">
-          <a href="https://www.google.com.pe/maps/" target="_blank"
-            >Google Maps</a
-          >
+          <a href="https://www.google.com.pe/maps/" target="_blank">Google Maps</a>
         </p>
       </div>
     </div>
@@ -35,9 +31,7 @@
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
         <div class="form-group">
-          <label for="geocoder" class="bmd-label-floating"
-            >Latitud y longitud:</label
-          >
+          <label for="geocoder" class="bmd-label-floating">Latitud y longitud:</label>
           <input
             type="text"
             class="form-control"
@@ -64,9 +58,7 @@
     </div>
     <div class="row">
       <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-        <p class="text-lat">
-          Ingrese los datos para la gráfica de análisis de sentimiento
-        </p>
+        <p class="text-lat">Ingrese los datos para la gráfica de análisis de sentimiento</p>
       </div>
     </div>
     <div class="row well">
@@ -140,36 +132,20 @@
       <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3">
         <div class="form-group">
           <label for="f_inicio" class="bmd-label-floating">Fecha Inicio:</label>
-          <input
-            type="date"
-            class="form-control"
-            name="f_inicio"
-            id="f_inicio"
-            v-model="f_inicio"
-          />
+          <input type="date" class="form-control" name="f_inicio" id="f_inicio" v-model="f_inicio" />
         </div>
       </div>
       <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3">
         <div class="form-group">
           <label for="f_inicio" class="bmd-label-floating">Fecha Fin:</label>
-          <input
-            type="date"
-            class="form-control"
-            name="f_fin"
-            id="f_fin"
-            v-model="f_fin"
-          />
+          <input type="date" class="form-control" name="f_fin" id="f_fin" v-model="f_fin" />
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
         <div class="form-group">
-          <button
-            class="btn btn-raised btn-primary"
-            type="button"
-            v-on:click.prevent="getocial()"
-          >
+          <button class="btn btn-raised btn-primary" type="button" v-on:click.prevent="getocial()">
             <i class="fa fa-search"></i> Buscar
           </button>
         </div>
@@ -179,7 +155,8 @@
         </div>
       </div>
     </div>
-    <br /><br />
+    <br />
+    <br />
     <!-- <div class="form-group">
           <label for="f_inicio" class="bmd-label-floating">Fecha Inicio:</label>
           <input
@@ -199,7 +176,7 @@
             id="f_fin"
             v-model="f_fin"
           />
-        </div> -->
+    </div>-->
 
     <div class="row well">
       <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
@@ -245,7 +222,9 @@
       </div>
       <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
     </div>
-    <br /><br /><br />
+    <br />
+    <br />
+    <br />
     <div class="row">
       <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
         <p class="text-lat text-center">Análisis de sentimiento</p>
@@ -267,7 +246,9 @@
         </div>
       </div>
     </div>
-    <br /><br /><br />
+    <br />
+    <br />
+    <br />
     <div class="row well">
       <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
         <p class="text-lat text-center">Análisis por dispositivo</p>
@@ -303,7 +284,7 @@
         </div>
         <!-- <a class="btn btn-primary" href="#open-modal">
           Ver
-        </a> -->
+        </a>-->
         <!-- <div id="open-modal" class="modal-window">
   <div>
     <a href="#" title="Close" class="modal-close">Cerrar</a>
@@ -313,7 +294,7 @@
     </div>
    
     </div>
-    </div> -->
+        </div>-->
       </div>
       <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4 text-center">
         <!-- <button
@@ -323,7 +304,7 @@
           data-target="#dominio"
         >
           Ver
-        </button> -->
+        </button>-->
       </div>
     </div>
     <div class="row">
@@ -348,35 +329,26 @@
                       <table class="table table-bordered">
                         <tr>
                           <td rowspan="6" class="estilo_wi_rows text-center">
-                            <img
-                              width="320px"
-                              :src="list.user && list.user.profile_image_url"
-                            />
+                            <img :src="list.user && list.user.profile_image_url" />
                           </td>
-                          <td class="nombre_info">
-                            {{ list.user && list.user.name }}
-                          </td>
+                          <td class="nombre_info">{{ list.user && list.user.name }}</td>
                         </tr>
                         <tr>
                           <td class>{{ list.full_text }}</td>
                         </tr>
                         <tr>
                           <td class="nombre_link">
-                            <a
-                              :href="list.user && list.user.screen_name"
-                              target="_blank"
-                              >Usuario:
+                            <a :href="list.user && list.user.screen_name" target="_blank">
+                              Usuario:
                               {{
-                                "https://twitter.com/" + list.user &&
-                                  list.user.screen_name
-                              }}</a
-                            >
+                              "https://twitter.com/" + list.user &&
+                              list.user.screen_name
+                              }}
+                            </a>
                           </td>
                         </tr>
                         <tr>
-                          <td class="nombre_info">
-                            Dirección: {{ list.user && list.user.location }}
-                          </td>
+                          <td class="nombre_info">Dirección: {{ list.user && list.user.location }}</td>
                         </tr>
                         <tr>
                           <td class="nombre_info">
@@ -396,9 +368,7 @@
                 </template>
                 <template v-else>
                   <tr>
-                    <td colspan="3" align="center">
-                      No hay resultados disponibles
-                    </td>
+                    <td colspan="3" align="center">No hay resultados disponibles</td>
                   </tr>
                 </template>
               </tbody>
@@ -471,7 +441,7 @@
           </div>
         </div>
       </div>
-    </div>-->
+  </div>-->
 </template>
 <script>
 import swal from "sweetalert";
