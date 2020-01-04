@@ -142,6 +142,27 @@
         </div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+        <p class="text-lat">Ingrese los palabra a buscar en #WORLD CLOUD</p>
+      </div>
+    </div>
+    <div class="row well">
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+        <div class="form-group">
+          <label for="great" class="bmd-label-floating">Palabra:</label>
+          <input
+            type="text"
+            class="form-control"
+            name="wordcloud"
+            id="wordcloud"
+            v-model="wordcloud"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+    </div>
     <div class="row">
       <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
         <div class="form-group">
@@ -274,7 +295,7 @@
         <p class="text-lat text-center">Hastag Cloud</p>
       </div>
       <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
-        <p class="text-lat text-center">Top Dominios</p>
+        <p class="text-lat text-center">Top Palabra Cloud</p>
       </div>
     </div>
     <div class="row well">
@@ -297,6 +318,9 @@
         </div>-->
       </div>
       <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4 text-center">
+        <div id="content6">
+          <canvas ref="chart6"></canvas>
+        </div>
         <!-- <button
           type="button"
           class="btn btn-primary"
@@ -495,6 +519,7 @@ export default {
       good: "",
       neutral: "",
       bad: "",
+      wordcloud: "",
       terrible: "",
       loading: false,
       donusData: [
@@ -528,6 +553,7 @@ export default {
       let neutral = this.neutral;
       let bad = this.bad;
       let terrible = this.terrible;
+      let wordcloud = this.wordcloud;
       this.loading = true;
       axios
         .get(
@@ -543,7 +569,8 @@ export default {
               good: good,
               neutral: neutral,
               bad: bad,
-              terrible: terrible
+              terrible: terrible,
+              wordcloud: wordcloud
             }
           },
           config2
@@ -574,16 +601,22 @@ export default {
           //   (item, index, x) => console.log(item)
           // );
           /////////////////////
+          //PALABRAS CLOUD
+          var wordObjectI = Object.keys(response.data.palabraListMasRepetidos);
+          var wordObjectV = Object.keys(response.data.palabraListMasRepetidos);
+
           var chart = this.$refs.chart;
           var chart2 = this.$refs.chart2;
           var chart3 = this.$refs.chart3;
           var chart4 = this.$refs.chart4;
           var chart5 = this.$refs.chart5;
+          var chart6 = this.$refs.chart6;
           var ctx = chart.getContext("2d");
           var ctx2 = chart2.getContext("2d");
           var ctx3 = chart3.getContext("2d");
           var ctx4 = chart4.getContext("2d");
           var ctx5 = chart5.getContext("2d");
+          var ctx6 = chart6.getContext("2d");
           var myChart = new Chart(ctx, {
             type: "bar",
             data: {
@@ -748,6 +781,40 @@ export default {
                 {
                   label: "Hastag",
                   data: HastagObjectV,
+                  lineTension: 0,
+                  backgroundColor: "transparent",
+                  borderColor: "orange",
+                  borderDash: [5, 5],
+                  pointBorderColor: "orange",
+                  pointBackgroundColor: "rgba(255,150,0,0.5)",
+                  pointRadius: 5,
+                  pointHoverRadius: 10,
+                  pointHitRadius: 30,
+                  pointBorderWidth: 2,
+                  pointStyle: "rectRounded"
+                }
+              ]
+            },
+            options: {
+              legend: {
+                display: true,
+                position: "top",
+                labels: {
+                  boxWidth: 80,
+                  fontColor: "black"
+                }
+              }
+            }
+          });
+
+          var myChart6 = new Chart(ctx6, {
+            type: "line",
+            data: {
+              labels: wordObjectI,
+              datasets: [
+                {
+                  label: "Palabra",
+                  data: wordObjectV,
                   lineTension: 0,
                   backgroundColor: "transparent",
                   borderColor: "orange",

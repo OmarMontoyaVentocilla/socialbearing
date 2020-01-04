@@ -278,7 +278,10 @@ def createinstagram(request):
 
     return JsonResponse(mensaje)
     
-
+def datetime_from_utc_to_local(utc_datetime):
+    now_timestamp = time.time()
+    offset = datetime.datetime.fromtimestamp(now_timestamp) - datetime.datetime.utcfromtimestamp(now_timestamp)
+    return utc_datetime + offset
 
 @login_required(login_url="/accounts/login")
 def createtw(request):
@@ -596,7 +599,7 @@ def getsocial(request):
     palabra=request.GET.get('palabra')
     f_inicio=request.GET.get('f_inicio')
     f_fin=request.GET.get('f_fin')
-    palabraBuscar="chile"
+    palabraBuscar=request.GET.get('wordcloud')
     great=request.GET.get('great')
     good=request.GET.get('good')
     neutral=request.GET.get('neutral')
@@ -723,7 +726,7 @@ def getsocial(request):
             retweetsC.append(tweet.retweet_count)
             sourceAll.append(tweet.source)
             domainAll.append(tweet.user.url)
-            timeAll.append(tweet.created_at.strftime("%H:%M %p"))
+            timeAll.append(datetime.datetime.strftime(tweet.created_at,'%H:%M %p'))
             favoritesC.append(tweet.user.favourites_count)
             repliesC.append(tweet.in_reply_to_status_id_str)
             fullTextResponse.append(tweet.full_text)
@@ -792,6 +795,7 @@ def getsocial(request):
             "sourceAllDispositive":sourceAll,
             "socurceMergeDispositive":socurceMerge,
             "time":resultado_time,
+            "timeAll":timeAll,
             "domainAll":domain,
             "sentimiento":sentimiento
         }
