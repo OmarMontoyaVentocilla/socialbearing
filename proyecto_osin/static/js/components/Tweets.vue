@@ -657,7 +657,7 @@ export default {
               }
             }
           });
-
+          //andy pull origin master
           var myChart3 = new Chart(ctx3, {
             type: "pie",
             data: {
