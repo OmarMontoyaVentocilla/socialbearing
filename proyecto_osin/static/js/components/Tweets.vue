@@ -741,7 +741,7 @@ export default {
 
           var myChart4 = new Chart(ctx4, {
             type: "line",
-            data: {
+            data: { 
               labels: timeObjectI,
               datasets: [
                 {

@@ -9,3 +9,18 @@ class Persona(models.Model):
      
     def __str__(self):
         return self.nombre
+
+class Positivo(models.Model):
+    nombre=models.CharField(max_length=100)
+    tiempo_registro=models.DateTimeField(auto_now=True)
+    estado=models.CharField(max_length=2,default='1')
+
+class Neutro(models.Model):
+    nombre=models.CharField(max_length=100)
+    tiempo_registro=models.DateTimeField(auto_now=True)
+    estado=models.CharField(max_length=2,default='1')
+
+class Negativo(models.Model):
+    nombre=models.CharField(max_length=100)
+    tiempo_registro=models.DateTimeField(auto_now=True)
+    estado=models.CharField(max_length=2,default='1')
