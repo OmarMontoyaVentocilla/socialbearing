@@ -30,6 +30,9 @@ import jastag from './components/Hastag.vue';
 import trending from './components/Trending.vue';
 import roles from './components/Roles.vue';
 import tweet from './components/Tweets.vue';
+import positivo from './components/Positivo.vue';
+import neutro from './components/Neutro.vue';
+import negativo from './components/Negativo.vue';
 
 const app = new Vue({
     el: '#app',
@@ -46,6 +49,9 @@ const app = new Vue({
         jastag,
         trending,
         roles,
-        tweet
+        tweet,
+        positivo,
+        neutro,
+        negativo
     }
 });

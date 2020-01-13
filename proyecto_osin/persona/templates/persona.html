@@ -1,16 +1,39 @@
 {% extends "layout.html" %} {% block title %}Inicio || Persona {% endblock %} {% block content %}
-
 <br><br><br>
 <div class="container">
-    <div class="row well titulo_busqueda sombra_caja" data-toggle="collapse" data-target="#demo2">
-        <div class="col-lg-12">
-            <i class="fa fa-plus"></i> Gestión Personas
-        </div>
+
+
+    <div class="row well titulo_busqueda sombra_caja" data-toggle="collapse" data-target="#positivo"
+        aria-expanded="false" aria-controls="positivo">
+        <div class="col-lg-12"><i class="fa fa-plus"></i> Positivo</div>
     </div>
-    <div id="demo2">
-        <persona></persona>
+
+    <div class="collapse" id="positivo">
+        <positivo></positivo>
     </div>
+
+    <div class="row well titulo_busqueda sombra_caja" data-toggle="collapse" data-target="#neutro" aria-expanded="false"
+        aria-controls="neutro">
+        <div class="col-lg-12"><i class="fa fa-plus"></i> Neutro</div>
+    </div>
+    <div class="collapse" id="neutro">
+        <neutro></neutro>
+    </div>
+
+    <div class="row well titulo_busqueda sombra_caja" data-toggle="collapse" data-target="#negativo"
+        aria-expanded="false" aria-controls="negativo">
+        <div class="col-lg-12"><i class="fa fa-plus"></i> Negativo</div>
+    </div>
+    <div class="collapse" id="negativo">
+        <negativo></negativo>
+    </div>
+
+
+
 </div>
+
+
+
 
 
 {% endblock %}

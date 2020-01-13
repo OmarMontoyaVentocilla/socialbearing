@@ -362,10 +362,13 @@
                         </tr>
                         <tr>
                           <td class="nombre_link">
-                            <a :href="list.user && list.user.screen_name" target="_blank">
+                            <a
+                              :href="list.user && 'https://twitter.com/'+ list.user.screen_name"
+                              target="_blank"
+                            >
                               Usuario:
-                              {{
-                              "https://twitter.com/" + list.user &&
+                              https://twitter.com/{{
+                              list.user &&
                               list.user.screen_name
                               }}
                             </a>
@@ -741,7 +744,7 @@ export default {
 
           var myChart4 = new Chart(ctx4, {
             type: "line",
-            data: { 
+            data: {
               labels: timeObjectI,
               datasets: [
                 {
