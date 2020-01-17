@@ -64,7 +64,7 @@
     <div class="row well">
       <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
         <div class="form-group">
-          <label for="great" class="bmd-label-floating">Muy bueno:</label>
+          <label for="great" class="bmd-label-floating">Positivo:</label>
           <input
             type="text"
             class="form-control"
@@ -75,19 +75,7 @@
           />
         </div>
       </div>
-      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-        <div class="form-group">
-          <label for="good" class="bmd-label-floating">Bueno:</label>
-          <input
-            type="text"
-            class="form-control"
-            name="good"
-            id="good"
-            v-model="good"
-            autocomplete="off"
-          />
-        </div>
-      </div>
+
       <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
         <div class="form-group">
           <label for="neutro" class="bmd-label-floating">Neutro:</label>
@@ -103,7 +91,7 @@
       </div>
       <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
         <div class="form-group">
-          <label for="bad" class="bmd-label-floating">Malo:</label>
+          <label for="bad" class="bmd-label-floating">Negativo:</label>
           <input
             type="text"
             class="form-control"
@@ -118,19 +106,6 @@
     <div class="row well">
       <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3">
         <div class="form-group">
-          <label for="bad" class="bmd-label-floating">Muy Malo:</label>
-          <input
-            type="text"
-            class="form-control"
-            name="terrible"
-            id="terrible"
-            v-model="terrible"
-            autocomplete="off"
-          />
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3">
-        <div class="form-group">
           <label for="f_inicio" class="bmd-label-floating">Fecha Inicio:</label>
           <input type="date" class="form-control" name="f_inicio" id="f_inicio" v-model="f_inicio" />
         </div>
@@ -143,26 +118,6 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-        <p class="text-lat">Ingrese los palabra a buscar en #WORLD CLOUD</p>
-      </div>
-    </div>
-    <div class="row well">
-      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-        <div class="form-group">
-          <label for="great" class="bmd-label-floating">Palabra:</label>
-          <input
-            type="text"
-            class="form-control"
-            name="wordcloud"
-            id="wordcloud"
-            v-model="wordcloud"
-            autocomplete="off"
-          />
-        </div>
-      </div>
-    </div>
     <div class="row">
       <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
         <div class="form-group">
@@ -332,6 +287,26 @@
       </div>
     </div>
     <div class="row">
+      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+        <p class="text-lat">Ingrese los palabra a buscar en #WORLD CLOUD</p>
+      </div>
+    </div>
+    <div class="row well">
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+        <div class="form-group">
+          <label for="great" class="bmd-label-floating">Palabra:</label>
+          <input
+            type="text"
+            class="form-control"
+            name="wordcloud"
+            id="wordcloud"
+            v-model="wordcloud"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="panel panel-success panel_estilo">
           <div class="panel-body div1 table-responsive">
@@ -480,6 +455,7 @@ import Chart from "chart.js";
 // global.Raphael = Raphael;
 import moment from "moment";
 import "moment/locale/es";
+
 //import { DonutChart, BarChart, LineChart, AreaChart } from "vue-morris";
 //import XLSX from "xlsx";
 var tokent = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
@@ -500,7 +476,9 @@ var config2 = {
 
 export default {
   created() {
-    // this.getocial();
+    this.getPositivo();
+    this.getNeutro();
+    this.getNegativo();
   },
   mounted() {},
   components: {
@@ -510,6 +488,11 @@ export default {
   data() {
     return {
       listaTweet: [],
+      positivo: [],
+      neutro: [],
+      names: ["Positivo", "Neutro", "Negativo"],
+      values: [],
+      negativo: [],
       dataTweet: [],
       listaItemCloud: [],
       listaValueCloud: [],
@@ -542,6 +525,39 @@ export default {
         timer: 1500
       });
     },
+
+    getPositivo() {
+      axios
+        .get("http://127.0.0.1:8000/api/positivo/")
+        .then(response => {
+          this.positivo = response.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    getNeutro() {
+      axios
+        .get("http://127.0.0.1:8000/api/neutro/")
+        .then(response => {
+          this.neutro = response.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+
+    getNegativo() {
+      axios
+        .get("http://127.0.0.1:8000/api/negativo/")
+        .then(response => {
+          this.negativo = response.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+
     format_date(fecha) {
       return moment(fecha).format("LLLL");
     },
@@ -552,10 +568,8 @@ export default {
       let f_inicio = this.f_inicio;
       let f_fin = this.f_fin;
       let great = this.great;
-      let good = this.good;
       let neutral = this.neutral;
       let bad = this.bad;
-      let terrible = this.terrible;
       let wordcloud = this.wordcloud;
       this.loading = true;
       axios
@@ -569,10 +583,8 @@ export default {
               f_inicio: f_inicio,
               f_fin: f_fin,
               great: great,
-              good: good,
               neutral: neutral,
               bad: bad,
-              terrible: terrible,
               wordcloud: wordcloud
             }
           },
@@ -620,10 +632,12 @@ export default {
           var ctx4 = chart4.getContext("2d");
           var ctx5 = chart5.getContext("2d");
           var ctx6 = chart6.getContext("2d");
+          //sentimiento nuevo
+
           var myChart = new Chart(ctx, {
             type: "bar",
             data: {
-              labels: ["Muy bueno", "Bueno", "Neutro", "Malo", "Terrible"],
+              labels: ["Positivo", "Neutro", "Negativo"],
               datasets: [
                 {
                   label: "Sentimiento",
@@ -631,15 +645,11 @@ export default {
                   backgroundColor: [
                     "rgba(255, 99, 132, 0.2)",
                     "rgba(54, 162, 235, 0.2)",
-                    "rgba(255, 206, 86, 0.2)",
-                    "rgba(75, 192, 192, 0.2)",
-                    "rgba(153, 102, 255, 0.2)"
+                    "rgba(255, 206, 86, 0.2)"
                   ],
                   borderColor: [
-                    "rgba(255,99,132,1)",
                     "rgba(54, 162, 235, 1)",
                     "rgba(255, 206, 86, 1)",
-                    "rgba(75, 192, 192, 1)",
                     "rgba(153, 102, 255, 1)"
                   ],
                   borderWidth: 1

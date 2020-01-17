@@ -13,6 +13,7 @@ from .models import Github
 from .models import Google
 from .models import Instagram
 from .models import PersonaRedes
+from persona.models import * 
 from .forms import AutoForm
 from fullcontact import FullContact
 import random
@@ -592,6 +593,12 @@ def gettrending(request):
 def contarElementosLista(lista):
     return {i:lista.count(i) for i in lista}
 
+def sumalista(listaNumeros):
+    laSuma = 0
+    for i in listaNumeros:
+        laSuma = laSuma + i
+    return laSuma
+
 #@login_required(login_url="/accounts/login")
 def getsocial(request):
     geocoder=request.GET.get('geocoder')
@@ -601,11 +608,9 @@ def getsocial(request):
     f_fin=request.GET.get('f_fin')
     palabraBuscar=request.GET.get('wordcloud')
     great=request.GET.get('great')
-    good=request.GET.get('good')
     neutral=request.GET.get('neutral')
     bad=request.GET.get('bad')
-    terrible=request.GET.get('terrible') 
-
+    
     consumer_key = '1laQ5JsXO0VnshtzI2hCEAUai'
     consumer_secret = 'fMX0PozHntGJA4dO7mQFYfhzTwXPcrjPvquf0QT2KfX0ur5z4M'
     access_token = '1193413476355584000-rXBVVxMzsguHuAgr66u6P8YTt4LkbJ'
@@ -677,11 +682,10 @@ def getsocial(request):
         socurceMerge=contarElementosLista(sourceAll)
         #####bueno
         greatListC=len(list(filter(lambda x: great in x , merged_list)))
-        goodListC=len(list(filter(lambda x: good in x , merged_list)))
         neutralListC=len(list(filter(lambda x: neutral in x , merged_list)))
         badListC=len(list(filter(lambda x: bad in x , merged_list)))
-        terribleListC=len(list(filter(lambda x: terrible in x , merged_list)))
-        sentimiento=[greatListC,goodListC,neutralListC,badListC,terribleListC],
+
+        sentimiento=[greatListC,neutralListC,badListC],
         xxxx={
             "data":responses,
             "CountTwets":size,
@@ -769,12 +773,48 @@ def getsocial(request):
         ######
         socurceMerge=contarElementosLista(sourceAll)
         #####bueno
-        greatListC=len(list(filter(lambda x: great in x , merged_list)))
-        goodListC=len(list(filter(lambda x: good in x , merged_list)))
-        neutralListC=len(list(filter(lambda x: neutral in x , merged_list)))
-        badListC=len(list(filter(lambda x: bad in x , merged_list)))
-        terribleListC=len(list(filter(lambda x: terrible in x , merged_list)))
-        sentimiento=[greatListC,goodListC,neutralListC,badListC,terribleListC],
+        greatListC=''
+        if(great!=''):
+            print("entro sin vacio great")
+            greatListC=len(list(filter(lambda x: great in x , merged_list)))
+        else:
+            print("entro  vacio great")
+            sumaPositivo=[]
+            for e in Positivo.objects.all():
+                valor=len(list(filter(lambda x: e.nombre in x , merged_list)))
+            sumaPositivo.append(valor)
+            print(sumaPositivo)
+            greatListC=sumalista(sumaPositivo)
+        
+        neutralListC=''
+        if(neutral!=''):
+            print("entro sin vacio neutro")
+            neutralListC=len(list(filter(lambda x: neutral in x , merged_list)))
+        else:
+            print("entro  vacio neutro")
+            sumaNeutro=[]
+            for e in Neutro.objects.all():
+                valor=len(list(filter(lambda x: e.nombre in x , merged_list)))
+            sumaNeutro.append(valor)
+            print(sumaNeutro)
+            neutralListC=sumalista(sumaNeutro)
+        
+        badListC=''
+        if(bad!=''):
+            print("entro sin vacio bad")
+            badListC=len(list(filter(lambda x: bad in x , merged_list)))
+        else:
+            print("entro vacio bad")
+            sumaNegativo=[]
+            for e in Negativo.objects.all():
+                valor=len(list(filter(lambda x: e.nombre in x , merged_list)))
+            sumaNegativo.append(valor)
+            print(sumaNegativo)
+            badListC=sumalista(sumaNegativo)
+
+
+        sentimiento=[greatListC,neutralListC,badListC],
+        print(sentimiento)
         xxxx={
             "data":responses,
             "CountTwets":size,
