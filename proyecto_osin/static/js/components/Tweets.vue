@@ -841,11 +841,11 @@ export default {
           var myChart5 = new Chart(ctx5, {
             type: "line",
             data: {
-              labels: HastagObjectI,
+              labels: HastagObjectI.slice(0, 10),
               datasets: [
                 {
                   label: "Hastag",
-                  data: HastagObjectV,
+                  data: HastagObjectV.slice(0, 10),
                   lineTension: 0,
                   backgroundColor: "transparent",
                   borderColor: "orange",
