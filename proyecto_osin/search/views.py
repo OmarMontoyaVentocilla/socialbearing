@@ -667,6 +667,8 @@ def getsocial(request):
         hastag=list(filter(lambda x: '#' in x , merged_list))
         countHastag=len(list(filter(lambda x: '#' in x , merged_list)))
         hastagMasRepetidos=contarElementosLista(hastag)
+        hastagMasRepetidos=sorted(hastagMasRepetidos.items(), key=operator.itemgetter(1), reverse=True)
+
         ###filtrar x usuario mencionados
         userMencion=list(filter(lambda x: '@' in x , merged_list))
         countUser=len(list(filter(lambda x: '@' in x , merged_list)))

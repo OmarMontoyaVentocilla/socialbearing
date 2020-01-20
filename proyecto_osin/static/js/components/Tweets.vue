@@ -619,7 +619,7 @@ export default {
           );
 
           var HastagObjectI = Object.keys(response.data.hastagMasRepetidos);
-          var HastagObjectV = Object.keys(response.data.hastagMasRepetidos);
+          var HastagObjectV = Object.values(response.data.hastagMasRepetidos);
 
           //TIME
           var tiempo = [];
