@@ -637,7 +637,7 @@ def getsocial(request):
             retweetsC.append(tweet.retweet_count)
             sourceAll.append(tweet.source)
             domainAll.append(tweet.user.url)
-            timeAll.append(tweet.created_at.strftime("%H:%M %p"))
+            timeAll.append(datetime.datetime.strftime(tweet.created_at,'%H:%M %p'))
             favoritesC.append(tweet.user.favourites_count)
             repliesC.append(tweet.in_reply_to_status_id_str)
             fullTextResponse.append(tweet.full_text)
@@ -667,8 +667,6 @@ def getsocial(request):
         hastag=list(filter(lambda x: '#' in x , merged_list))
         countHastag=len(list(filter(lambda x: '#' in x , merged_list)))
         hastagMasRepetidos=contarElementosLista(hastag)
-        hastagMasRepetidos=sorted(hastagMasRepetidos.items(), key=operator.itemgetter(1), reverse=True)
-
         ###filtrar x usuario mencionados
         userMencion=list(filter(lambda x: '@' in x , merged_list))
         countUser=len(list(filter(lambda x: '@' in x , merged_list)))
@@ -682,11 +680,48 @@ def getsocial(request):
         ######
         socurceMerge=contarElementosLista(sourceAll)
         #####bueno
-        greatListC=len(list(filter(lambda x: great in x , merged_list)))
-        neutralListC=len(list(filter(lambda x: neutral in x , merged_list)))
-        badListC=len(list(filter(lambda x: bad in x , merged_list)))
+        greatListC=''
+        if(great!=''):
+            print("entro sin vacio great")
+            greatListC=len(list(filter(lambda x: great in x , merged_list)))
+        else:
+            print("entro  vacio great")
+            sumaPositivo=[]
+            for e in Positivo.objects.all():
+                valor=len(list(filter(lambda x: e.nombre in x , merged_list)))
+                sumaPositivo.append(valor)
+            print(sumaPositivo)
+            greatListC=sumalista(sumaPositivo)
+        
+        neutralListC=''
+        if(neutral!=''):
+            print("entro sin vacio neutro")
+            neutralListC=len(list(filter(lambda x: neutral in x , merged_list)))
+        else:
+            print("entro  vacio neutro")
+            sumaNeutro=[]
+            for e in Neutro.objects.all():
+                valor=len(list(filter(lambda x: e.nombre in x , merged_list)))
+                sumaNeutro.append(valor)
+            print(sumaNeutro)
+            neutralListC=sumalista(sumaNeutro)
+        
+        badListC=''
+        if(bad!=''):
+            print("entro sin vacio bad")
+            badListC=len(list(filter(lambda x: bad in x , merged_list)))
+        else:
+            print("entro vacio bad")
+            sumaNegativo=[]
+            for e in Negativo.objects.all():
+                valor=len(list(filter(lambda x: e.nombre in x , merged_list)))
+                sumaNegativo.append(valor)
+            print(sumaNegativo)
+            badListC=sumalista(sumaNegativo)
+
 
         sentimiento=[greatListC,neutralListC,badListC],
+        print(sentimiento)
         xxxx={
             "data":responses,
             "CountTwets":size,
@@ -707,6 +742,7 @@ def getsocial(request):
             "sourceAllDispositive":sourceAll,
             "socurceMergeDispositive":socurceMerge,
             "time":resultado_time,
+            "timeAll":timeAll,
             "domainAll":domain,
             "sentimiento":sentimiento
         }
@@ -863,7 +899,7 @@ def getsocial(request):
             retweetsC.append(tweet.retweet_count)
             sourceAll.append(tweet.source)
             domainAll.append(tweet.user.url)
-            timeAll.append(tweet.created_at.strftime("%H:%M %p"))
+            timeAll.append(datetime.datetime.strftime(tweet.created_at,'%H:%M %p'))
             favoritesC.append(tweet.user.favourites_count)
             repliesC.append(tweet.in_reply_to_status_id_str)
             fullTextResponse.append(tweet.full_text)
@@ -906,12 +942,48 @@ def getsocial(request):
         ######
         socurceMerge=contarElementosLista(sourceAll)
         #####bueno
-        greatListC=len(list(filter(lambda x: great in x , merged_list)))
-        goodListC=len(list(filter(lambda x: good in x , merged_list)))
-        neutralListC=len(list(filter(lambda x: neutral in x , merged_list)))
-        badListC=len(list(filter(lambda x: bad in x , merged_list)))
-        terribleListC=len(list(filter(lambda x: terrible in x , merged_list)))
-        sentimiento=[greatListC,goodListC,neutralListC,badListC,terribleListC],
+        greatListC=''
+        if(great!=''):
+            print("entro sin vacio great")
+            greatListC=len(list(filter(lambda x: great in x , merged_list)))
+        else:
+            print("entro  vacio great")
+            sumaPositivo=[]
+            for e in Positivo.objects.all():
+                valor=len(list(filter(lambda x: e.nombre in x , merged_list)))
+                sumaPositivo.append(valor)
+            print(sumaPositivo)
+            greatListC=sumalista(sumaPositivo)
+        
+        neutralListC=''
+        if(neutral!=''):
+            print("entro sin vacio neutro")
+            neutralListC=len(list(filter(lambda x: neutral in x , merged_list)))
+        else:
+            print("entro  vacio neutro")
+            sumaNeutro=[]
+            for e in Neutro.objects.all():
+                valor=len(list(filter(lambda x: e.nombre in x , merged_list)))
+                sumaNeutro.append(valor)
+            print(sumaNeutro)
+            neutralListC=sumalista(sumaNeutro)
+        
+        badListC=''
+        if(bad!=''):
+            print("entro sin vacio bad")
+            badListC=len(list(filter(lambda x: bad in x , merged_list)))
+        else:
+            print("entro vacio bad")
+            sumaNegativo=[]
+            for e in Negativo.objects.all():
+                valor=len(list(filter(lambda x: e.nombre in x , merged_list)))
+                sumaNegativo.append(valor)
+            print(sumaNegativo)
+            badListC=sumalista(sumaNegativo)
+
+
+        sentimiento=[greatListC,neutralListC,badListC],
+        print(sentimiento)
         xxxx={
             "data":responses,
             "CountTwets":size,
@@ -932,6 +1004,7 @@ def getsocial(request):
             "sourceAllDispositive":sourceAll,
             "socurceMergeDispositive":socurceMerge,
             "time":resultado_time,
+            "timeAll":timeAll,
             "domainAll":domain,
             "sentimiento":sentimiento
         }
