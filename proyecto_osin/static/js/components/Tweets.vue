@@ -294,13 +294,26 @@
     <div class="row well">
       <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
         <div class="form-group">
-          <label for="great" class="bmd-label-floating">Palabra:</label>
+          <label for="great" class="bmd-label-floating">Texto:</label>
           <input
             type="text"
             class="form-control"
             name="wordcloud"
             id="wordcloud"
             v-model="wordcloud"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+        <div class="form-group">
+          <label for="great" class="bmd-label-floating">Usuario:</label>
+          <input
+            type="text"
+            class="form-control"
+            name="user"
+            id="user"
+            v-model="user"
             autocomplete="off"
           />
         </div>
@@ -321,8 +334,8 @@
                 </tr>
               </thead>
               <tbody>
-                <template v-if="listaTweet != ''">
-                  <tr v-for="(list, index) in listaTweet.data">
+                <template v-if="filteredList != ''">
+                  <tr v-for="(list, index) in filteredList">
                     <!-- <td>{{ list.id_str }}</td> -->
                     <td>
                       <table class="table table-bordered">
@@ -494,6 +507,7 @@ export default {
       values: [],
       negativo: [],
       dataTweet: [],
+      user: "",
       listaItemCloud: [],
       listaValueCloud: [],
       geocoder: "",
@@ -947,6 +961,23 @@ export default {
     //       console.log(error);
     //     });
     // }
+  },
+  computed: {
+    filteredList() {
+      if (this.listaTweet.data) {
+        return this.listaTweet.data
+          .filter(res => {
+            return res.full_text
+              .toLowerCase()
+              .includes(this.wordcloud.toLowerCase());
+          })
+          .filter(res => {
+            return res.user.name
+              .toLowerCase()
+              .includes(this.user.toLowerCase());
+          });
+      }
+    }
   }
 };
 </script>
