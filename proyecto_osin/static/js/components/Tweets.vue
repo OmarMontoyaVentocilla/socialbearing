@@ -110,12 +110,12 @@
           <input type="date" class="form-control" name="f_inicio" id="f_inicio" v-model="f_inicio" />
         </div>
       </div>
-      <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3">
+      <!-- <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3">
         <div class="form-group">
           <label for="f_inicio" class="bmd-label-floating">Fecha Fin:</label>
           <input type="date" class="form-control" name="f_fin" id="f_fin" v-model="f_fin" />
         </div>
-      </div>
+      </div>-->
     </div>
 
     <div class="row">
@@ -213,12 +213,12 @@
     <div class="row well">
       <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
         <div id="content">
-          <canvas ref="chart"></canvas>
+          <canvas id="chart"></canvas>
         </div>
       </div>
       <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
         <div id="content2">
-          <canvas ref="chart2"></canvas>
+          <canvas id="chart2"></canvas>
         </div>
       </div>
     </div>
@@ -236,12 +236,12 @@
     <div class="row well">
       <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
         <div id="content3">
-          <canvas ref="chart3"></canvas>
+          <canvas id="chart3"></canvas>
         </div>
       </div>
       <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
         <div id="content4">
-          <canvas ref="chart4"></canvas>
+          <canvas id="chart4"></canvas>
         </div>
       </div>
     </div>
@@ -256,7 +256,7 @@
     <div class="row well">
       <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4 text-center">
         <div id="content5">
-          <canvas ref="chart5"></canvas>
+          <canvas id="chart5"></canvas>
         </div>
         <!-- <a class="btn btn-primary" href="#open-modal">
           Ver
@@ -274,7 +274,7 @@
       </div>
       <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4 text-center">
         <div id="content6">
-          <canvas ref="chart6"></canvas>
+          <canvas id="chart6"></canvas>
         </div>
         <!-- <button
           type="button"
@@ -566,7 +566,6 @@ export default {
       let kilometro = this.kilometro;
       let palabra = this.palabra;
       let f_inicio = this.f_inicio;
-      let f_fin = this.f_fin;
       let great = this.great;
       let neutral = this.neutral;
       let bad = this.bad;
@@ -581,7 +580,6 @@ export default {
               kilometro: kilometro,
               palabra: palabra,
               f_inicio: f_inicio,
-              f_fin: f_fin,
               great: great,
               neutral: neutral,
               bad: bad,
@@ -610,8 +608,18 @@ export default {
           var HastagObjectV = Object.keys(response.data.hastagMasRepetidos);
 
           //TIME
-          var timeObjectI = Object.keys(response.data.time);
-          var timeObjectV = Object.values(response.data.time);
+          var tiempo = [];
+          for (let i of response.data.data) {
+            tiempo.push(moment(i.created_at).format("hh:mm A"));
+          }
+          var repetidos = {};
+          tiempo.forEach(function(numero) {
+            repetidos[numero] = (repetidos[numero] || 0) + 1;
+          });
+          console.log(repetidos);
+
+          var timeObjectI = Object.keys(repetidos);
+          var timeObjectV = Object.values(repetidos);
           // var itemsSource = response.data.socurceMergeDispositive.filter(
           //   (item, index, x) => console.log(item)
           // );
@@ -620,18 +628,48 @@ export default {
           var wordObjectI = Object.keys(response.data.palabraListMasRepetidos);
           var wordObjectV = Object.keys(response.data.palabraListMasRepetidos);
 
-          var chart = this.$refs.chart;
-          var chart2 = this.$refs.chart2;
-          var chart3 = this.$refs.chart3;
-          var chart4 = this.$refs.chart4;
-          var chart5 = this.$refs.chart5;
-          var chart6 = this.$refs.chart6;
-          var ctx = chart.getContext("2d");
-          var ctx2 = chart2.getContext("2d");
-          var ctx3 = chart3.getContext("2d");
-          var ctx4 = chart4.getContext("2d");
-          var ctx5 = chart5.getContext("2d");
-          var ctx6 = chart6.getContext("2d");
+          var chart = document.getElementById("content");
+          chart.innerHTML = "&nbsp;";
+          $("#content").append('<canvas id="chart"><canvas>');
+          var ctx = $("#chart")
+            .get(0)
+            .getContext("2d");
+
+          var chart2 = document.getElementById("content2");
+          chart2.innerHTML = "&nbsp;";
+          $("#content2").append('<canvas id="chart2"><canvas>');
+          var ctx2 = $("#chart2")
+            .get(0)
+            .getContext("2d");
+
+          var chart3 = document.getElementById("content3");
+          chart3.innerHTML = "&nbsp;";
+          $("#content3").append('<canvas id="chart3"><canvas>');
+          var ctx3 = $("#chart3")
+            .get(0)
+            .getContext("2d");
+
+          var chart4 = document.getElementById("content4");
+          chart4.innerHTML = "&nbsp;";
+          $("#content4").append('<canvas id="chart4"><canvas>');
+          var ctx4 = $("#chart4")
+            .get(0)
+            .getContext("2d");
+
+          var chart5 = document.getElementById("content5");
+          chart5.innerHTML = "&nbsp;";
+          $("#content5").append('<canvas id="chart5"><canvas>');
+          var ctx5 = $("#chart5")
+            .get(0)
+            .getContext("2d");
+
+          var chart6 = document.getElementById("content6");
+          chart6.innerHTML = "&nbsp;";
+          $("#content6").append('<canvas id="chart6"><canvas>');
+          var ctx6 = $("#chart6")
+            .get(0)
+            .getContext("2d");
+
           //sentimiento nuevo
 
           var myChart = new Chart(ctx, {
@@ -758,7 +796,7 @@ export default {
               labels: timeObjectI,
               datasets: [
                 {
-                  label: "Tiempo",
+                  label: "Cantidad",
                   data: timeObjectV,
                   lineTension: 0,
                   backgroundColor: "transparent",

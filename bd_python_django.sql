@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-11-2019 a las 01:26:21
--- Versión del servidor: 10.1.22-MariaDB
--- Versión de PHP: 7.1.4
+-- Tiempo de generación: 19-01-2020 a las 18:38:54
+-- Versión del servidor: 10.3.16-MariaDB
+-- Versión de PHP: 7.3.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -104,7 +104,16 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (39, 'Can delete twitter', 13, 'delete_twitter'),
 (40, 'Can add persona', 14, 'add_persona'),
 (41, 'Can change persona', 14, 'change_persona'),
-(42, 'Can delete persona', 14, 'delete_persona');
+(42, 'Can delete persona', 14, 'delete_persona'),
+(43, 'Can add negativo', 15, 'add_negativo'),
+(44, 'Can change negativo', 15, 'change_negativo'),
+(45, 'Can delete negativo', 15, 'delete_negativo'),
+(46, 'Can add neutro', 16, 'add_neutro'),
+(47, 'Can change neutro', 16, 'change_neutro'),
+(48, 'Can delete neutro', 16, 'delete_neutro'),
+(49, 'Can add positivo', 17, 'add_positivo'),
+(50, 'Can change positivo', 17, 'change_positivo'),
+(51, 'Can delete positivo', 17, 'delete_positivo');
 
 -- --------------------------------------------------------
 
@@ -140,7 +149,8 @@ INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `userna
 (9, 'pbkdf2_sha256$100000$XJFfhP074Zrd$E8eQAXaCYlfe2OZ+wyK27DOp3iP/db7ifhjQ3oE2NVA=', '2019-11-04 05:52:42.092099', 1, 'admin1', '', '', '', 1, 1, '2019-10-27 05:50:31.628020'),
 (10, 'pbkdf2_sha256$100000$71ybHKlivBbF$oKJXG4Ajy/5sLf02tften8kRJb8m/ap63BaWl2hnWkY=', '2019-11-11 00:08:52.868034', 1, 'admin3', '', '', '', 1, 1, '2019-11-11 00:08:50.544487'),
 (11, 'pbkdf2_sha256$100000$Qqu1ViC111ev$5wFqWTXHiOsGfJx9ECcc7vKL5vq/To6yXEFtscgW3t4=', '2019-11-16 18:04:15.704352', 0, 'admin4', '', '', '', 0, 1, '2019-11-16 18:03:22.428496'),
-(12, 'pbkdf2_sha256$100000$Gs2ttPSKVjbj$UiIePple1naolYTVS7gbMiUgn83R6YSWQZ4NF9rc9Bo=', '2019-11-24 16:34:37.839225', 0, 'sac', '', '', '', 0, 1, '2019-11-24 16:33:27.223558');
+(12, 'pbkdf2_sha256$100000$Gs2ttPSKVjbj$UiIePple1naolYTVS7gbMiUgn83R6YSWQZ4NF9rc9Bo=', '2020-01-19 16:00:17.026711', 0, 'sac', '', '', '', 0, 1, '2019-11-24 16:33:27.223558'),
+(13, 'pbkdf2_sha256$100000$RB6QrReUZmBs$UEhQuOX5slw5AXlYxzTpMRg5gYp2L6vszDnPpMBCWE0=', '2019-11-26 06:07:31.908666', 1, 'andy', '', '', '', 1, 1, '2019-11-26 06:06:41.657611');
 
 -- --------------------------------------------------------
 
@@ -175,7 +185,7 @@ CREATE TABLE `auth_user_user_permissions` (
 CREATE TABLE `django_admin_log` (
   `id` int(11) NOT NULL,
   `action_time` datetime(6) NOT NULL,
-  `object_id` longtext,
+  `object_id` longtext DEFAULT NULL,
   `object_repr` varchar(200) NOT NULL,
   `action_flag` smallint(5) UNSIGNED NOT NULL,
   `change_message` longtext NOT NULL,
@@ -212,7 +222,10 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (2, 'auth', 'permission'),
 (4, 'auth', 'user'),
 (5, 'contenttypes', 'contenttype'),
+(15, 'persona', 'negativo'),
+(16, 'persona', 'neutro'),
 (14, 'persona', 'persona'),
+(17, 'persona', 'positivo'),
 (7, 'search', 'auto'),
 (8, 'search', 'facebook'),
 (9, 'search', 'github'),
@@ -257,7 +270,8 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (15, 'persona', '0002_auto_20180525_1903', '2018-07-28 00:12:23.123308'),
 (16, 'search', '0001_initial', '2018-07-28 00:12:38.546567'),
 (17, 'sessions', '0001_initial', '2018-07-28 00:12:39.450587'),
-(18, 'search', '0002_auto_20181017_0058', '2018-10-17 05:58:37.245231');
+(18, 'search', '0002_auto_20181017_0058', '2018-10-17 05:58:37.245231'),
+(19, 'persona', '0003_negativo_neutro_positivo', '2020-01-12 06:56:40.060663');
 
 -- --------------------------------------------------------
 
@@ -276,7 +290,83 @@ CREATE TABLE `django_session` (
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('9nd31cp72antmxy33611x7r5nlua26r5', 'OWI0YTM3YzdjYjQ5MTExMjliNWJmNWM0NDE2MjM4N2E4OWNiZDljOTp7Il9hdXRoX3VzZXJfaWQiOiIxMiIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiMjdjMzNmNjM3MGYwY2FmZmQyMWMxZGE4YzRiMTY4ZGI4MjY1NDY1OCIsImlkX3VzZXIiOjEyfQ==', '2019-12-08 16:34:37.900270');
+('0vynxjkal53wcp153pox2q4lm11ciqrf', 'OWI0YTM3YzdjYjQ5MTExMjliNWJmNWM0NDE2MjM4N2E4OWNiZDljOTp7Il9hdXRoX3VzZXJfaWQiOiIxMiIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiMjdjMzNmNjM3MGYwY2FmZmQyMWMxZGE4YzRiMTY4ZGI4MjY1NDY1OCIsImlkX3VzZXIiOjEyfQ==', '2020-01-05 22:48:28.796672'),
+('9nd31cp72antmxy33611x7r5nlua26r5', 'OWI0YTM3YzdjYjQ5MTExMjliNWJmNWM0NDE2MjM4N2E4OWNiZDljOTp7Il9hdXRoX3VzZXJfaWQiOiIxMiIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiMjdjMzNmNjM3MGYwY2FmZmQyMWMxZGE4YzRiMTY4ZGI4MjY1NDY1OCIsImlkX3VzZXIiOjEyfQ==', '2019-12-08 16:34:37.900270'),
+('mmrtcwsox374g59md52uaecykkilxz8a', 'OWI0YTM3YzdjYjQ5MTExMjliNWJmNWM0NDE2MjM4N2E4OWNiZDljOTp7Il9hdXRoX3VzZXJfaWQiOiIxMiIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiMjdjMzNmNjM3MGYwY2FmZmQyMWMxZGE4YzRiMTY4ZGI4MjY1NDY1OCIsImlkX3VzZXIiOjEyfQ==', '2020-02-02 16:00:17.117064');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `persona_negativo`
+--
+
+CREATE TABLE `persona_negativo` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `tiempo_registro` datetime(6) NOT NULL,
+  `estado` varchar(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `persona_negativo`
+--
+
+INSERT INTO `persona_negativo` (`id`, `nombre`, `tiempo_registro`, `estado`) VALUES
+(1, 'contra', '2020-01-13 00:28:22.183280', '1'),
+(2, 'cayó', '2020-01-12 22:09:40.310828', '1'),
+(3, 'destrucción', '2020-01-12 22:09:50.679652', '1'),
+(4, 'destruyó', '2020-01-12 22:09:57.925373', '1'),
+(5, 'perdió', '2020-01-12 22:10:11.195280', '1'),
+(6, 'holocausto', '2020-01-12 22:11:33.977552', '1'),
+(7, 'terror', '2020-01-12 22:11:41.265636', '1'),
+(8, 'terrorismo', '2020-01-12 22:11:49.076872', '1'),
+(9, 'terrorista', '2020-01-12 22:11:54.548954', '1'),
+(10, 'sabotaje', '2020-01-12 22:12:05.361061', '1'),
+(11, 'temor', '2020-01-12 22:12:28.146491', '1'),
+(12, 'miedo', '2020-01-12 22:12:54.439159', '1'),
+(13, 'crisis', '2020-01-12 22:13:13.083164', '1'),
+(14, 'clausurar', '2020-01-12 22:13:25.316357', '1'),
+(15, 'clausuró', '2020-01-12 22:13:34.526699', '1'),
+(16, 'auxilio', '2020-01-12 22:14:06.065226', '1'),
+(17, 'espía', '2020-01-12 22:17:01.094546', '1'),
+(18, 'ataque', '2020-01-12 22:17:07.748097', '1'),
+(19, 'cerrar', '2020-01-12 22:17:17.350702', '1'),
+(20, 'cerró', '2020-01-12 22:17:31.463724', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `persona_neutro`
+--
+
+CREATE TABLE `persona_neutro` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `tiempo_registro` datetime(6) NOT NULL,
+  `estado` varchar(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `persona_neutro`
+--
+
+INSERT INTO `persona_neutro` (`id`, `nombre`, `tiempo_registro`, `estado`) VALUES
+(1, 'necesario', '2020-01-13 00:27:34.332823', '1'),
+(2, 'mantiene', '2020-01-12 22:06:50.932236', '1'),
+(3, 'neutral', '2020-01-12 22:06:59.598107', '1'),
+(4, 'constante', '2020-01-12 22:07:09.855700', '1'),
+(5, 'imparcial', '2020-01-12 22:07:18.567123', '1'),
+(6, 'creó', '2020-01-12 22:07:24.630002', '1'),
+(7, 'manifestación', '2020-01-12 22:07:33.347948', '1'),
+(8, 'informa', '2020-01-12 22:07:43.663333', '1'),
+(9, 'informó', '2020-01-12 22:07:54.051181', '1'),
+(10, 'comunica', '2020-01-12 22:08:02.036472', '1'),
+(11, 'comunicó', '2020-01-12 22:08:08.166010', '1'),
+(12, 'reunión', '2020-01-12 22:08:19.694904', '1'),
+(13, 'aparece', '2020-01-12 22:08:26.551347', '1'),
+(14, 'apareció', '2020-01-12 22:08:34.427844', '1'),
+(15, 'compromiso', '2020-01-12 22:08:41.185391', '1'),
+(16, 'seguro', '2020-01-12 22:08:47.617871', '1');
 
 -- --------------------------------------------------------
 
@@ -297,9 +387,47 @@ CREATE TABLE `persona_persona` (
 --
 
 INSERT INTO `persona_persona` (`id`, `nombre`, `apodo`, `estado`, `tiempo_registro`) VALUES
-(1, 'omar anthony montoya ventocilla', 'camarada', '1', '2018-07-28 00:47:26.991306'),
+(1, 'omar anthony montoya ventocillas', 'camarada', '1', '2020-01-12 20:53:56.491527'),
 (2, 'liliana ventocilla casafranca', 'huevca', '1', '2018-07-28 00:47:52.135811'),
 (3, 'juan', 'camotes', '1', '2019-10-27 05:44:28.768716');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `persona_positivo`
+--
+
+CREATE TABLE `persona_positivo` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `tiempo_registro` datetime(6) NOT NULL,
+  `estado` varchar(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `persona_positivo`
+--
+
+INSERT INTO `persona_positivo` (`id`, `nombre`, `tiempo_registro`, `estado`) VALUES
+(1, 'favor', '2020-01-13 00:27:19.214300', '1'),
+(2, 'resolvió', '2020-01-12 22:02:39.780454', '1'),
+(3, 'solucionó', '2020-01-12 22:04:05.891328', '1'),
+(4, 'recupera', '2020-01-12 22:04:13.239652', '1'),
+(5, 'recuperó', '2020-01-12 22:04:18.708559', '1'),
+(6, 'consolidó', '2020-01-12 22:04:24.458480', '1'),
+(7, 'inteligente', '2020-01-12 22:04:33.431143', '1'),
+(8, 'ganó', '2020-01-12 22:04:40.707404', '1'),
+(9, 'ganar', '2020-01-12 22:04:46.034643', '1'),
+(10, 'apoyó', '2020-01-12 22:04:55.575741', '1'),
+(11, 'apoyo', '2020-01-12 22:05:04.146605', '1'),
+(12, 'rescate', '2020-01-12 22:05:11.725519', '1'),
+(13, 'rescató', '2020-01-12 22:05:20.119670', '1'),
+(14, 'confiar', '2020-01-12 22:05:48.696262', '1'),
+(15, 'confianza', '2020-01-12 22:05:55.431962', '1'),
+(16, 'logros', '2020-01-12 22:06:02.812288', '1'),
+(17, 'logró', '2020-01-12 22:06:07.614296', '1'),
+(18, 'acuerdo', '2020-01-12 22:06:14.251054', '1'),
+(19, 'gracias', '2020-01-12 22:06:22.675032', '1');
 
 -- --------------------------------------------------------
 
@@ -591,9 +719,27 @@ ALTER TABLE `django_session`
   ADD KEY `django_session_expire_date_a5c62663` (`expire_date`);
 
 --
+-- Indices de la tabla `persona_negativo`
+--
+ALTER TABLE `persona_negativo`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `persona_neutro`
+--
+ALTER TABLE `persona_neutro`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `persona_persona`
 --
 ALTER TABLE `persona_persona`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `persona_positivo`
+--
+ALTER TABLE `persona_positivo`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -656,86 +802,121 @@ ALTER TABLE `search_twitter`
 --
 ALTER TABLE `auth_group`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `auth_group_permissions`
 --
 ALTER TABLE `auth_group_permissions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+
 --
 -- AUTO_INCREMENT de la tabla `auth_user`
 --
 ALTER TABLE `auth_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
 --
 -- AUTO_INCREMENT de la tabla `auth_user_groups`
 --
 ALTER TABLE `auth_user_groups`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `auth_user_user_permissions`
 --
 ALTER TABLE `auth_user_user_permissions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT de la tabla `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
 --
 -- AUTO_INCREMENT de la tabla `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT de la tabla `persona_negativo`
+--
+ALTER TABLE `persona_negativo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT de la tabla `persona_neutro`
+--
+ALTER TABLE `persona_neutro`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
 --
 -- AUTO_INCREMENT de la tabla `persona_persona`
 --
 ALTER TABLE `persona_persona`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `persona_positivo`
+--
+ALTER TABLE `persona_positivo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
 --
 -- AUTO_INCREMENT de la tabla `search_auto`
 --
 ALTER TABLE `search_auto`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `search_facebook`
 --
 ALTER TABLE `search_facebook`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT de la tabla `search_github`
 --
 ALTER TABLE `search_github`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT de la tabla `search_google`
 --
 ALTER TABLE `search_google`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT de la tabla `search_instagram`
 --
 ALTER TABLE `search_instagram`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT de la tabla `search_personaredes`
 --
 ALTER TABLE `search_personaredes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
 --
 -- AUTO_INCREMENT de la tabla `search_twitter`
 --
 ALTER TABLE `search_twitter`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- Restricciones para tablas volcadas
 --
