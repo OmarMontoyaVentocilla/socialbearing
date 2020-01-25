@@ -288,7 +288,7 @@
     </div>
     <div class="row">
       <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-        <p class="text-lat">Ingrese los palabra a buscar en #WORLD CLOUD</p>
+        <p class="text-lat">Ingrese los palabra a buscar:</p>
       </div>
     </div>
     <div class="row well">
@@ -640,7 +640,9 @@ export default {
           /////////////////////
           //PALABRAS CLOUD
           var wordObjectI = Object.keys(response.data.palabraListMasRepetidos);
-          var wordObjectV = Object.keys(response.data.palabraListMasRepetidos);
+          var wordObjectV = Object.values(
+            response.data.palabraListMasRepetidos
+          );
 
           var chart = document.getElementById("content");
           chart.innerHTML = "&nbsp;";
@@ -814,7 +816,7 @@ export default {
                   data: timeObjectV,
                   lineTension: 0,
                   backgroundColor: "transparent",
-                  borderColor: "orange",
+                  borderColor: "black",
                   borderDash: [5, 5],
                   pointBorderColor: "orange",
                   pointBackgroundColor: "rgba(255,150,0,0.5)",
@@ -848,7 +850,7 @@ export default {
                   data: HastagObjectV.slice(0, 10),
                   lineTension: 0,
                   backgroundColor: "transparent",
-                  borderColor: "orange",
+                  borderColor: "black",
                   borderDash: [5, 5],
                   pointBorderColor: "orange",
                   pointBackgroundColor: "rgba(255,150,0,0.5)",
@@ -875,14 +877,14 @@ export default {
           var myChart6 = new Chart(ctx6, {
             type: "line",
             data: {
-              labels: wordObjectI,
+              labels: wordObjectI.slice(0, 10),
               datasets: [
                 {
                   label: "Palabra",
-                  data: wordObjectV,
+                  data: wordObjectV.slice(0, 10),
                   lineTension: 0,
                   backgroundColor: "transparent",
-                  borderColor: "orange",
+                  borderColor: "black",
                   borderDash: [5, 5],
                   pointBorderColor: "orange",
                   pointBackgroundColor: "rgba(255,150,0,0.5)",

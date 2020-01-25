@@ -674,7 +674,33 @@ def getsocial(request):
         ##filtrar x hora 
         ####palabra si existe
         palabraList=list(filter(lambda x: palabraBuscar in x , merged_list))
-        palabraListMasRepetidos=contarElementosLista(palabraList)
+        listaPlabarasNoquiero=['@','#','https','de',',','|','RT','sí','la','-','…','lo','r…','🇦🇷','(',')','/','!','Ft','Zee','¿Has','2-1','3-1','1-1','60.','3.0','2.0','🇦🇷.','.La…','...','les','por','De','Por','Y','y','su','qu…','ha','.','Este','sus']
+        palabraList=list(filter(lambda x: palabraBuscar in x , merged_list))
+        notArroba=list(filter(lambda x:'@' not in x, merged_list))
+        notHastag=list(filter(lambda x:'#' not in x, notArroba))
+        notHttp=list(filter(lambda x:'https' not in x, notHastag))
+        notde=list(filter(lambda x:'de' not in x, notHttp))
+        notcoma=list(filter(lambda x:',' not in x, notde))
+        notraya=list(filter(lambda x:'|' not in x, notcoma))
+        notrt=list(filter(lambda x:'RT' not in x, notraya))
+        nosi=list(filter(lambda x:'sí' not in x, notrt))
+        nola=list(filter(lambda x:'la' not in x, nosi))
+        nogui=list(filter(lambda x:'-' not in x, nola))
+        nopunt=list(filter(lambda x:'…' not in x, nogui))
+        nogi=list(filter(lambda x:'/' not in x, nopunt))
+        noadmin=list(filter(lambda x:'!' not in x, nogi))
+        nopunt=list(filter(lambda x:'...' not in x, noadmin))
+        nouno=list(filter(lambda x:'0' not in x, nopunt))
+        nodos=list(filter(lambda x:'1' not in x, nouno))
+        notres=list(filter(lambda x:'2' not in x, nodos))
+        nocuatro=list(filter(lambda x:'3' not in x, notres))
+        nocinco=list(filter(lambda x:'4' not in x, nocuatro))
+        noseis=list(filter(lambda x:'5' not in x, nocinco))
+        nosiete=list(filter(lambda x:'6' not in x, noseis))
+        noocho=list(filter(lambda x:'7' not in x, nosiete))
+        nonueve=list(filter(lambda x:'8' not in x, noocho))
+        nocer=list(filter(lambda x:'9' not in x, nonueve))     
+        palabraListMasRepetidos=contarElementosLista(nocer)
         ####FILTRAR POR IPHONE
         resultado_time=contarElementosLista(timeAll)
         ######
@@ -804,7 +830,33 @@ def getsocial(request):
         ##filtrar x hora 
         ####palabra si existe
         palabraList=list(filter(lambda x: palabraBuscar in x , merged_list))
-        palabraListMasRepetidos=contarElementosLista(palabraList)
+        listaPlabarasNoquiero=['@','#','https','de',',','|','RT','sí','la','-','…','lo','r…','🇦🇷','(',')','/','!','Ft','Zee','¿Has','2-1','3-1','1-1','60.','3.0','2.0','🇦🇷.','.La…','...','les','por','De','Por','Y','y','su','qu…','ha','.','Este','sus']
+        palabraList=list(filter(lambda x: palabraBuscar in x , merged_list))
+        notArroba=list(filter(lambda x:'@' not in x, merged_list))
+        notHastag=list(filter(lambda x:'#' not in x, notArroba))
+        notHttp=list(filter(lambda x:'https' not in x, notHastag))
+        notde=list(filter(lambda x:'de' not in x, notHttp))
+        notcoma=list(filter(lambda x:',' not in x, notde))
+        notraya=list(filter(lambda x:'|' not in x, notcoma))
+        notrt=list(filter(lambda x:'RT' not in x, notraya))
+        nosi=list(filter(lambda x:'sí' not in x, notrt))
+        nola=list(filter(lambda x:'la' not in x, nosi))
+        nogui=list(filter(lambda x:'-' not in x, nola))
+        nopunt=list(filter(lambda x:'…' not in x, nogui))
+        nogi=list(filter(lambda x:'/' not in x, nopunt))
+        noadmin=list(filter(lambda x:'!' not in x, nogi))
+        nopunt=list(filter(lambda x:'...' not in x, noadmin))
+        nouno=list(filter(lambda x:'0' not in x, nopunt))
+        nodos=list(filter(lambda x:'1' not in x, nouno))
+        notres=list(filter(lambda x:'2' not in x, nodos))
+        nocuatro=list(filter(lambda x:'3' not in x, notres))
+        nocinco=list(filter(lambda x:'4' not in x, nocuatro))
+        noseis=list(filter(lambda x:'5' not in x, nocinco))
+        nosiete=list(filter(lambda x:'6' not in x, noseis))
+        noocho=list(filter(lambda x:'7' not in x, nosiete))
+        nonueve=list(filter(lambda x:'8' not in x, noocho))
+        nocer=list(filter(lambda x:'9' not in x, nonueve))     
+        palabraListMasRepetidos=contarElementosLista(nocer)
         ####FILTRAR POR IPHONE
         resultado_time=contarElementosLista(timeAll)
         ######
@@ -936,7 +988,191 @@ def getsocial(request):
         ##filtrar x hora 
         ####palabra si existe
         palabraList=list(filter(lambda x: palabraBuscar in x , merged_list))
-        palabraListMasRepetidos=contarElementosLista(palabraList)
+        listaPlabarasNoquiero=['@','#','https','de',',','|','RT','sí','la','-','…','lo','r…','🇦🇷','(',')','/','!','Ft','Zee','¿Has','2-1','3-1','1-1','60.','3.0','2.0','🇦🇷.','.La…','...','les','por','De','Por','Y','y','su','qu…','ha','.','Este','sus']
+        palabraList=list(filter(lambda x: palabraBuscar in x , merged_list))
+        notArroba=list(filter(lambda x:'@' not in x, merged_list))
+        notHastag=list(filter(lambda x:'#' not in x, notArroba))
+        notHttp=list(filter(lambda x:'https' not in x, notHastag))
+        notde=list(filter(lambda x:'de' not in x, notHttp))
+        notcoma=list(filter(lambda x:',' not in x, notde))
+        notraya=list(filter(lambda x:'|' not in x, notcoma))
+        notrt=list(filter(lambda x:'RT' not in x, notraya))
+        nosi=list(filter(lambda x:'sí' not in x, notrt))
+        nola=list(filter(lambda x:'la' not in x, nosi))
+        nogui=list(filter(lambda x:'-' not in x, nola))
+        nopunt=list(filter(lambda x:'…' not in x, nogui))
+        nogi=list(filter(lambda x:'/' not in x, nopunt))
+        noadmin=list(filter(lambda x:'!' not in x, nogi))
+        nopunt=list(filter(lambda x:'...' not in x, noadmin))
+        nouno=list(filter(lambda x:'0' not in x, nopunt))
+        nodos=list(filter(lambda x:'1' not in x, nouno))
+        notres=list(filter(lambda x:'2' not in x, nodos))
+        nocuatro=list(filter(lambda x:'3' not in x, notres))
+        nocinco=list(filter(lambda x:'4' not in x, nocuatro))
+        noseis=list(filter(lambda x:'5' not in x, nocinco))
+        nosiete=list(filter(lambda x:'6' not in x, noseis))
+        noocho=list(filter(lambda x:'7' not in x, nosiete))
+        nonueve=list(filter(lambda x:'8' not in x, noocho))
+        nocer=list(filter(lambda x:'9' not in x, nonueve))     
+        palabraListMasRepetidos=contarElementosLista(nocer)
+        ####FILTRAR POR IPHONE
+        resultado_time=contarElementosLista(timeAll)
+        ######
+        socurceMerge=contarElementosLista(sourceAll)
+        #####bueno
+        greatListC=''
+        if(great!=''):
+            print("entro sin vacio great")
+            greatListC=len(list(filter(lambda x: great in x , merged_list)))
+        else:
+            print("entro  vacio great")
+            sumaPositivo=[]
+            for e in Positivo.objects.all():
+                valor=len(list(filter(lambda x: e.nombre in x , merged_list)))
+                sumaPositivo.append(valor)
+            print(sumaPositivo)
+            greatListC=sumalista(sumaPositivo)
+        
+        neutralListC=''
+        if(neutral!=''):
+            print("entro sin vacio neutro")
+            neutralListC=len(list(filter(lambda x: neutral in x , merged_list)))
+        else:
+            print("entro  vacio neutro")
+            sumaNeutro=[]
+            for e in Neutro.objects.all():
+                valor=len(list(filter(lambda x: e.nombre in x , merged_list)))
+                sumaNeutro.append(valor)
+            print(sumaNeutro)
+            neutralListC=sumalista(sumaNeutro)
+        
+        badListC=''
+        if(bad!=''):
+            print("entro sin vacio bad")
+            badListC=len(list(filter(lambda x: bad in x , merged_list)))
+        else:
+            print("entro vacio bad")
+            sumaNegativo=[]
+            for e in Negativo.objects.all():
+                valor=len(list(filter(lambda x: e.nombre in x , merged_list)))
+                sumaNegativo.append(valor)
+            print(sumaNegativo)
+            badListC=sumalista(sumaNegativo)
+
+
+        sentimiento=[greatListC,neutralListC,badListC],
+        print(sentimiento)
+        xxxx={
+            "data":responses,
+            "CountTwets":size,
+            "retweetsCount":sumaRC,
+            "favCount":sumaFav,
+            "timeframes":timefr,
+            "repliesCount":odd_num,
+            "fullTextResponse":fullTextResponse,     
+            "words":merged_list,
+            "hastag":hastag,
+            "countHastag":countHastag,
+            "hastagMasRepetidos":hastagMasRepetidos,
+            "userMencion":userMencion,
+            "countUser":countUser,
+            "usersMasRepetidos":usersMasRepetidos,
+            "palabraList":palabraList,
+            "palabraListMasRepetidos":palabraListMasRepetidos,
+            "sourceAllDispositive":sourceAll,
+            "socurceMergeDispositive":socurceMerge,
+            "time":resultado_time,
+            "timeAll":timeAll,
+            "domainAll":domain,
+            "sentimiento":sentimiento
+        }
+        data=json.dumps(xxxx)
+        return HttpResponse(data,content_type="application/json")
+    elif(palabra!='' and geocoder=='' and kilometro=='' and f_inicio!=''):
+        print("entra aqui 5")
+        geocode="{},{}km".format(geocoder,kilometro)
+        print(geocode)
+        tweets = tweepy.Cursor(api.search,q=palabra,lang="es",since=f_inicio,tweet_mode='extended').items(300)
+        response=[]
+        fullTextResponse=[]
+        responses=[]
+        retweetsC=[]
+        sourceAll=[]
+        domainAll=[]
+        favoritesC=[]
+        timeAll=[] 
+        repliesC=[]
+        for i,tweet in enumerate(tweets):
+            response.append(tweet)
+            datax=response[i]._json
+            responses.append(datax)
+            retweetsC.append(tweet.retweet_count)
+            sourceAll.append(tweet.source)
+            domainAll.append(tweet.user.url)
+            timeAll.append(datetime.datetime.strftime(tweet.created_at,'%H:%M %p'))
+            favoritesC.append(tweet.user.favourites_count)
+            repliesC.append(tweet.in_reply_to_status_id_str)
+            fullTextResponse.append(tweet.full_text)
+            
+        size=len(responses)
+        ##splietand arrays
+        arrayPalabra=[]
+        for i,text in enumerate(fullTextResponse):
+            arrayPalabra.append(text.split())
+        merged_list = [] 
+        for l in arrayPalabra:
+            merged_list += l
+        resultado_merge=contarElementosLista(merged_list)
+        #valores_ord = {k: v for k, v in sorted(resultado_merge.items(),key=operator.itemgetter(1))}   
+        ####random
+        timefr='{}{}'.format(random.randint(0, 5),"m")
+        #####hallar la suma de reteets count y favouyrites count 
+        sumaRC=0
+        sumaFav=0
+        for i in retweetsC:
+            sumaRC=sumaRC+i
+        for i in favoritesC:
+            sumaFav=sumaFav+i
+        odd_num=len(list(filter(lambda x: x!='null' and x!=None, repliesC)))
+        domain=list(filter(lambda x: x!='null' and x!=None, domainAll))
+        ####filtrar x #
+        hastag=list(filter(lambda x: '#' in x , merged_list))
+        countHastag=len(list(filter(lambda x: '#' in x , merged_list)))
+        hastagMasRepetidos=contarElementosLista(hastag)
+        ###filtrar x usuario mencionados
+        userMencion=list(filter(lambda x: '@' in x , merged_list))
+        countUser=len(list(filter(lambda x: '@' in x , merged_list)))
+        usersMasRepetidos=contarElementosLista(userMencion)
+        ##filtrar x hora 
+        ####palabra si existe
+        palabraList=list(filter(lambda x: palabraBuscar in x , merged_list))
+        listaPlabarasNoquiero=['@','#','https','de',',','|','RT','sí','la','-','…','lo','r…','🇦🇷','(',')','/','!','Ft','Zee','¿Has','2-1','3-1','1-1','60.','3.0','2.0','🇦🇷.','.La…','...','les','por','De','Por','Y','y','su','qu…','ha','.','Este','sus']
+        palabraList=list(filter(lambda x: palabraBuscar in x , merged_list))
+        notArroba=list(filter(lambda x:'@' not in x, merged_list))
+        notHastag=list(filter(lambda x:'#' not in x, notArroba))
+        notHttp=list(filter(lambda x:'https' not in x, notHastag))
+        notde=list(filter(lambda x:'de' not in x, notHttp))
+        notcoma=list(filter(lambda x:',' not in x, notde))
+        notraya=list(filter(lambda x:'|' not in x, notcoma))
+        notrt=list(filter(lambda x:'RT' not in x, notraya))
+        nosi=list(filter(lambda x:'sí' not in x, notrt))
+        nola=list(filter(lambda x:'la' not in x, nosi))
+        nogui=list(filter(lambda x:'-' not in x, nola))
+        nopunt=list(filter(lambda x:'…' not in x, nogui))
+        nogi=list(filter(lambda x:'/' not in x, nopunt))
+        noadmin=list(filter(lambda x:'!' not in x, nogi))
+        nopunt=list(filter(lambda x:'...' not in x, noadmin))
+        nouno=list(filter(lambda x:'0' not in x, nopunt))
+        nodos=list(filter(lambda x:'1' not in x, nouno))
+        notres=list(filter(lambda x:'2' not in x, nodos))
+        nocuatro=list(filter(lambda x:'3' not in x, notres))
+        nocinco=list(filter(lambda x:'4' not in x, nocuatro))
+        noseis=list(filter(lambda x:'5' not in x, nocinco))
+        nosiete=list(filter(lambda x:'6' not in x, noseis))
+        noocho=list(filter(lambda x:'7' not in x, nosiete))
+        nonueve=list(filter(lambda x:'8' not in x, noocho))
+        nocer=list(filter(lambda x:'9' not in x, nonueve))     
+        palabraListMasRepetidos=contarElementosLista(nocer)
         ####FILTRAR POR IPHONE
         resultado_time=contarElementosLista(timeAll)
         ######
