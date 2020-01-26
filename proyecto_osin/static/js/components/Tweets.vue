@@ -110,12 +110,12 @@
           <input type="date" class="form-control" name="f_inicio" id="f_inicio" v-model="f_inicio" />
         </div>
       </div>
-      <!-- <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3">
+      <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3">
         <div class="form-group">
           <label for="f_inicio" class="bmd-label-floating">Fecha Fin:</label>
           <input type="date" class="form-control" name="f_fin" id="f_fin" v-model="f_fin" />
         </div>
-      </div>-->
+      </div>
     </div>
 
     <div class="row">
@@ -580,6 +580,7 @@ export default {
       let kilometro = this.kilometro;
       let palabra = this.palabra;
       let f_inicio = this.f_inicio;
+      let f_fin = this.f_fin;
       let great = this.great;
       let neutral = this.neutral;
       let bad = this.bad;
@@ -594,6 +595,7 @@ export default {
               kilometro: kilometro,
               palabra: palabra,
               f_inicio: f_inicio,
+              f_fin: f_fin,
               great: great,
               neutral: neutral,
               bad: bad,

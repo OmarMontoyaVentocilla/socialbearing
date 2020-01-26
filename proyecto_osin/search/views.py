@@ -605,6 +605,7 @@ def getsocial(request):
     kilometro=request.GET.get('kilometro')
     palabra=request.GET.get('palabra')
     f_inicio=request.GET.get('f_inicio')
+    f_fin=request.GET.get('f_fin')
     palabraBuscar=request.GET.get('wordcloud')
     great=request.GET.get('great')
     neutral=request.GET.get('neutral')
@@ -617,10 +618,10 @@ def getsocial(request):
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_secret)
     api = tweepy.API(auth,wait_on_rate_limit=True,wait_on_rate_limit_notify=True)
-    if(palabra!='' and geocoder!='' and kilometro!='' and f_inicio!=''):
+    if(palabra!='' and geocoder!='' and kilometro!='' and f_inicio!='' and  f_fin!=''):
         print("entra aqui 1")
         geocode="{},{}km".format(geocoder,kilometro)
-        tweets = tweepy.Cursor(api.search,q=palabra,lang="es",geocode=geocode,since=f_inicio,tweet_mode='extended').items(300)
+        tweets = tweepy.Cursor(api.search,q=palabra,lang="es",geocode=geocode,since=f_inicio,until=f_fin,tweet_mode='extended').items(300)
         response=[]
         fullTextResponse=[]
         responses=[]
@@ -774,7 +775,7 @@ def getsocial(request):
         }
         data=json.dumps(xxxx)
         return HttpResponse(data,content_type="application/json")
-    elif(palabra!='' and geocoder=='' and kilometro=='' and f_inicio==''):
+    elif(palabra!='' and geocoder=='' and kilometro=='' and f_inicio=='' and f_fin==''):
         print("entra aqui 2")
         tweets = tweepy.Cursor(api.search,q=palabra,lang="es",tweet_mode='extended').items(300)
         response=[]
@@ -930,7 +931,7 @@ def getsocial(request):
         }
         data=json.dumps(xxxx)
         return HttpResponse(data,content_type="application/json")
-    elif(palabra!='' and geocoder!='' and kilometro!='' and f_inicio==''):
+    elif(palabra!='' and geocoder!='' and kilometro!='' and f_inicio=='' and f_fin==''):
         print("entra aqui 3")
         geocode="{},{}km".format(geocoder,kilometro)
         print(geocode)
@@ -1088,11 +1089,11 @@ def getsocial(request):
         }
         data=json.dumps(xxxx)
         return HttpResponse(data,content_type="application/json")
-    elif(palabra!='' and geocoder=='' and kilometro=='' and f_inicio!=''):
+    elif(palabra!='' and geocoder=='' and kilometro=='' and f_inicio!='' and f_fin!=''):
         print("entra aqui 5")
         geocode="{},{}km".format(geocoder,kilometro)
         print(geocode)
-        tweets = tweepy.Cursor(api.search,q=palabra,lang="es",since=f_inicio,tweet_mode='extended').items(300)
+        tweets = tweepy.Cursor(api.search,q=palabra,lang="es",since=f_inicio,until=f_fin,tweet_mode='extended').items(300)
         response=[]
         fullTextResponse=[]
         responses=[]
