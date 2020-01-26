@@ -700,52 +700,99 @@ def getsocial(request):
         nosiete=list(filter(lambda x:'6' not in x, noseis))
         noocho=list(filter(lambda x:'7' not in x, nosiete))
         nonueve=list(filter(lambda x:'8' not in x, noocho))
-        nocer=list(filter(lambda x:'9' not in x, nonueve))     
-        palabraListMasRepetidos=contarElementosLista(nocer)
+        nocer=list(filter(lambda x:'9' not in x, nonueve))
+        nocomo=list(filter(lambda x:'como' not in x, nocer))
+        nopara=list(filter(lambda x:'para' not in x, nocomo))
+        nodonde=list(filter(lambda x:'donde' not in x, nopara))
+        noy=list(filter(lambda x:'y' not in x, nodonde))
+        noel=list(filter(lambda x:'el' not in x, noy))
+        noyo=list(filter(lambda x:'yo' not in x, noel))
+        nocuando=list(filter(lambda x:'cuando' not in x, noyo))     
+        palabraListMasRepetidos=contarElementosLista(nocuando)
         ####FILTRAR POR IPHONE
         resultado_time=contarElementosLista(timeAll)
         ######
         socurceMerge=contarElementosLista(sourceAll)
         #####bueno
         greatListC=''
+        valorGeneral=''
         if(great!=''):
             print("entro sin vacio great")
             greatListC=len(list(filter(lambda x: great in x , merged_list)))
+            valorGeneral=[]
         else:
             print("entro  vacio great")
             sumaPositivo=[]
+            nombres=[]
             for e in Positivo.objects.all():
                 valor=len(list(filter(lambda x: e.nombre in x , merged_list)))
                 sumaPositivo.append(valor)
+                nombres.append(e.nombre)
+            reslut=dict(zip(nombres,sumaPositivo))
+            responseTotal=[]
+            for k,v in reslut.items():
+                data={
+                    "nombre":k,
+                    "valor":v
+                }
+                responseTotal.append(data)
             print(sumaPositivo)
+            print(nombres)
+            print(responseTotal)
             greatListC=sumalista(sumaPositivo)
+            valorGeneral=responseTotal
         
         neutralListC=''
+        valorGeneralN=''
         if(neutral!=''):
             print("entro sin vacio neutro")
             neutralListC=len(list(filter(lambda x: neutral in x , merged_list)))
+            valorGeneralN=[]
         else:
             print("entro  vacio neutro")
             sumaNeutro=[]
+            nombres=[]
             for e in Neutro.objects.all():
                 valor=len(list(filter(lambda x: e.nombre in x , merged_list)))
                 sumaNeutro.append(valor)
+                nombres.append(e.nombre)
+            reslut=dict(zip(nombres,sumaNeutro))
+            responseTotal=[]
+            for k,v in reslut.items():
+                data={
+                    "nombre":k,
+                    "valor":v
+                }
+                responseTotal.append(data)
             print(sumaNeutro)
             neutralListC=sumalista(sumaNeutro)
+            valorGeneralN=responseTotal
         
         badListC=''
+        valorGeneralB=''
         if(bad!=''):
             print("entro sin vacio bad")
             badListC=len(list(filter(lambda x: bad in x , merged_list)))
+            valorGeneralB=[]
         else:
             print("entro vacio bad")
             sumaNegativo=[]
+            nombres=[]
             for e in Negativo.objects.all():
                 valor=len(list(filter(lambda x: e.nombre in x , merged_list)))
                 sumaNegativo.append(valor)
+                nombres.append(e.nombre)
+            reslut=dict(zip(nombres,sumaNegativo))
+            responseTotal=[]
+            for k,v in reslut.items():
+                data={
+                    "nombre":k,
+                    "valor":v
+                }
+                responseTotal.append(data)
             print(sumaNegativo)
             badListC=sumalista(sumaNegativo)
-
+            valorGeneralB=responseTotal
 
         sentimiento=[greatListC,neutralListC,badListC],
         print(sentimiento)
@@ -771,7 +818,10 @@ def getsocial(request):
             "time":resultado_time,
             "timeAll":timeAll,
             "domainAll":domain,
-            "sentimiento":sentimiento
+            "sentimiento":sentimiento,
+            "valorGeneral":valorGeneral,
+            "valorGeneralN":valorGeneralN,
+            "valorGeneralB":valorGeneralB
         }
         data=json.dumps(xxxx)
         return HttpResponse(data,content_type="application/json")
@@ -856,52 +906,99 @@ def getsocial(request):
         nosiete=list(filter(lambda x:'6' not in x, noseis))
         noocho=list(filter(lambda x:'7' not in x, nosiete))
         nonueve=list(filter(lambda x:'8' not in x, noocho))
-        nocer=list(filter(lambda x:'9' not in x, nonueve))     
-        palabraListMasRepetidos=contarElementosLista(nocer)
+        nocer=list(filter(lambda x:'9' not in x, nonueve))
+        nocomo=list(filter(lambda x:'como' not in x, nocer))
+        nopara=list(filter(lambda x:'para' not in x, nocomo))
+        nodonde=list(filter(lambda x:'donde' not in x, nopara))
+        noy=list(filter(lambda x:'y' not in x, nodonde))
+        noel=list(filter(lambda x:'el' not in x, noy))
+        noyo=list(filter(lambda x:'yo' not in x, noel))
+        nocuando=list(filter(lambda x:'cuando' not in x, noyo))     
+        palabraListMasRepetidos=contarElementosLista(nocuando)
         ####FILTRAR POR IPHONE
         resultado_time=contarElementosLista(timeAll)
         ######
         socurceMerge=contarElementosLista(sourceAll)
         #####bueno
         greatListC=''
+        valorGeneral=''
         if(great!=''):
             print("entro sin vacio great")
             greatListC=len(list(filter(lambda x: great in x , merged_list)))
+            valorGeneral=[]
         else:
             print("entro  vacio great")
             sumaPositivo=[]
+            nombres=[]
             for e in Positivo.objects.all():
                 valor=len(list(filter(lambda x: e.nombre in x , merged_list)))
                 sumaPositivo.append(valor)
+                nombres.append(e.nombre)
+            reslut=dict(zip(nombres,sumaPositivo))
+            responseTotal=[]
+            for k,v in reslut.items():
+                data={
+                    "nombre":k,
+                    "valor":v
+                }
+                responseTotal.append(data)
             print(sumaPositivo)
+            print(nombres)
+            print(responseTotal)
             greatListC=sumalista(sumaPositivo)
+            valorGeneral=responseTotal
         
         neutralListC=''
+        valorGeneralN=''
         if(neutral!=''):
             print("entro sin vacio neutro")
             neutralListC=len(list(filter(lambda x: neutral in x , merged_list)))
+            valorGeneralN=[]
         else:
             print("entro  vacio neutro")
             sumaNeutro=[]
+            nombres=[]
             for e in Neutro.objects.all():
                 valor=len(list(filter(lambda x: e.nombre in x , merged_list)))
                 sumaNeutro.append(valor)
+                nombres.append(e.nombre)
+            reslut=dict(zip(nombres,sumaNeutro))
+            responseTotal=[]
+            for k,v in reslut.items():
+                data={
+                    "nombre":k,
+                    "valor":v
+                }
+                responseTotal.append(data)
             print(sumaNeutro)
             neutralListC=sumalista(sumaNeutro)
+            valorGeneralN=responseTotal
         
         badListC=''
+        valorGeneralB=''
         if(bad!=''):
             print("entro sin vacio bad")
             badListC=len(list(filter(lambda x: bad in x , merged_list)))
+            valorGeneralB=[]
         else:
             print("entro vacio bad")
             sumaNegativo=[]
+            nombres=[]
             for e in Negativo.objects.all():
                 valor=len(list(filter(lambda x: e.nombre in x , merged_list)))
                 sumaNegativo.append(valor)
+                nombres.append(e.nombre)
+            reslut=dict(zip(nombres,sumaNegativo))
+            responseTotal=[]
+            for k,v in reslut.items():
+                data={
+                    "nombre":k,
+                    "valor":v
+                }
+                responseTotal.append(data)
             print(sumaNegativo)
             badListC=sumalista(sumaNegativo)
-
+            valorGeneralB=responseTotal
 
         sentimiento=[greatListC,neutralListC,badListC],
         print(sentimiento)
@@ -927,7 +1024,10 @@ def getsocial(request):
             "time":resultado_time,
             "timeAll":timeAll,
             "domainAll":domain,
-            "sentimiento":sentimiento
+            "sentimiento":sentimiento,
+            "valorGeneral":valorGeneral,
+            "valorGeneralN":valorGeneralN,
+            "valorGeneralB":valorGeneralB
         }
         data=json.dumps(xxxx)
         return HttpResponse(data,content_type="application/json")
@@ -1014,52 +1114,99 @@ def getsocial(request):
         nosiete=list(filter(lambda x:'6' not in x, noseis))
         noocho=list(filter(lambda x:'7' not in x, nosiete))
         nonueve=list(filter(lambda x:'8' not in x, noocho))
-        nocer=list(filter(lambda x:'9' not in x, nonueve))     
-        palabraListMasRepetidos=contarElementosLista(nocer)
+        nocer=list(filter(lambda x:'9' not in x, nonueve))
+        nocomo=list(filter(lambda x:'como' not in x, nocer))
+        nopara=list(filter(lambda x:'para' not in x, nocomo))
+        nodonde=list(filter(lambda x:'donde' not in x, nopara))
+        noy=list(filter(lambda x:'y' not in x, nodonde))
+        noel=list(filter(lambda x:'el' not in x, noy))
+        noyo=list(filter(lambda x:'yo' not in x, noel))
+        nocuando=list(filter(lambda x:'cuando' not in x, noyo))     
+        palabraListMasRepetidos=contarElementosLista(nocuando)
         ####FILTRAR POR IPHONE
         resultado_time=contarElementosLista(timeAll)
         ######
         socurceMerge=contarElementosLista(sourceAll)
         #####bueno
         greatListC=''
+        valorGeneral=''
         if(great!=''):
             print("entro sin vacio great")
             greatListC=len(list(filter(lambda x: great in x , merged_list)))
+            valorGeneral=[]
         else:
             print("entro  vacio great")
             sumaPositivo=[]
+            nombres=[]
             for e in Positivo.objects.all():
                 valor=len(list(filter(lambda x: e.nombre in x , merged_list)))
                 sumaPositivo.append(valor)
+                nombres.append(e.nombre)
+            reslut=dict(zip(nombres,sumaPositivo))
+            responseTotal=[]
+            for k,v in reslut.items():
+                data={
+                    "nombre":k,
+                    "valor":v
+                }
+                responseTotal.append(data)
             print(sumaPositivo)
+            print(nombres)
+            print(responseTotal)
             greatListC=sumalista(sumaPositivo)
+            valorGeneral=responseTotal
         
         neutralListC=''
+        valorGeneralN=''
         if(neutral!=''):
             print("entro sin vacio neutro")
             neutralListC=len(list(filter(lambda x: neutral in x , merged_list)))
+            valorGeneralN=[]
         else:
             print("entro  vacio neutro")
             sumaNeutro=[]
+            nombres=[]
             for e in Neutro.objects.all():
                 valor=len(list(filter(lambda x: e.nombre in x , merged_list)))
                 sumaNeutro.append(valor)
+                nombres.append(e.nombre)
+            reslut=dict(zip(nombres,sumaNeutro))
+            responseTotal=[]
+            for k,v in reslut.items():
+                data={
+                    "nombre":k,
+                    "valor":v
+                }
+                responseTotal.append(data)
             print(sumaNeutro)
             neutralListC=sumalista(sumaNeutro)
+            valorGeneralN=responseTotal
         
         badListC=''
+        valorGeneralB=''
         if(bad!=''):
             print("entro sin vacio bad")
             badListC=len(list(filter(lambda x: bad in x , merged_list)))
+            valorGeneralB=[]
         else:
             print("entro vacio bad")
             sumaNegativo=[]
+            nombres=[]
             for e in Negativo.objects.all():
                 valor=len(list(filter(lambda x: e.nombre in x , merged_list)))
                 sumaNegativo.append(valor)
+                nombres.append(e.nombre)
+            reslut=dict(zip(nombres,sumaNegativo))
+            responseTotal=[]
+            for k,v in reslut.items():
+                data={
+                    "nombre":k,
+                    "valor":v
+                }
+                responseTotal.append(data)
             print(sumaNegativo)
             badListC=sumalista(sumaNegativo)
-
+            valorGeneralB=responseTotal
 
         sentimiento=[greatListC,neutralListC,badListC],
         print(sentimiento)
@@ -1085,7 +1232,10 @@ def getsocial(request):
             "time":resultado_time,
             "timeAll":timeAll,
             "domainAll":domain,
-            "sentimiento":sentimiento
+            "sentimiento":sentimiento,
+            "valorGeneral":valorGeneral,
+            "valorGeneralN":valorGeneralN,
+            "valorGeneralB":valorGeneralB
         }
         data=json.dumps(xxxx)
         return HttpResponse(data,content_type="application/json")
@@ -1172,52 +1322,99 @@ def getsocial(request):
         nosiete=list(filter(lambda x:'6' not in x, noseis))
         noocho=list(filter(lambda x:'7' not in x, nosiete))
         nonueve=list(filter(lambda x:'8' not in x, noocho))
-        nocer=list(filter(lambda x:'9' not in x, nonueve))     
-        palabraListMasRepetidos=contarElementosLista(nocer)
+        nocer=list(filter(lambda x:'9' not in x, nonueve))
+        nocomo=list(filter(lambda x:'como' not in x, nocer))
+        nopara=list(filter(lambda x:'para' not in x, nocomo))
+        nodonde=list(filter(lambda x:'donde' not in x, nopara))
+        noy=list(filter(lambda x:'y' not in x, nodonde))
+        noel=list(filter(lambda x:'el' not in x, noy))
+        noyo=list(filter(lambda x:'yo' not in x, noel))
+        nocuando=list(filter(lambda x:'cuando' not in x, noyo))     
+        palabraListMasRepetidos=contarElementosLista(nocuando)
         ####FILTRAR POR IPHONE
         resultado_time=contarElementosLista(timeAll)
         ######
         socurceMerge=contarElementosLista(sourceAll)
         #####bueno
         greatListC=''
+        valorGeneral=''
         if(great!=''):
             print("entro sin vacio great")
             greatListC=len(list(filter(lambda x: great in x , merged_list)))
+            valorGeneral=[]
         else:
             print("entro  vacio great")
             sumaPositivo=[]
+            nombres=[]
             for e in Positivo.objects.all():
                 valor=len(list(filter(lambda x: e.nombre in x , merged_list)))
                 sumaPositivo.append(valor)
+                nombres.append(e.nombre)
+            reslut=dict(zip(nombres,sumaPositivo))
+            responseTotal=[]
+            for k,v in reslut.items():
+                data={
+                    "nombre":k,
+                    "valor":v
+                }
+                responseTotal.append(data)
             print(sumaPositivo)
+            print(nombres)
+            print(responseTotal)
             greatListC=sumalista(sumaPositivo)
+            valorGeneral=responseTotal
         
         neutralListC=''
+        valorGeneralN=''
         if(neutral!=''):
             print("entro sin vacio neutro")
             neutralListC=len(list(filter(lambda x: neutral in x , merged_list)))
+            valorGeneralN=[]
         else:
             print("entro  vacio neutro")
             sumaNeutro=[]
+            nombres=[]
             for e in Neutro.objects.all():
                 valor=len(list(filter(lambda x: e.nombre in x , merged_list)))
                 sumaNeutro.append(valor)
+                nombres.append(e.nombre)
+            reslut=dict(zip(nombres,sumaNeutro))
+            responseTotal=[]
+            for k,v in reslut.items():
+                data={
+                    "nombre":k,
+                    "valor":v
+                }
+                responseTotal.append(data)
             print(sumaNeutro)
             neutralListC=sumalista(sumaNeutro)
+            valorGeneralN=responseTotal
         
         badListC=''
+        valorGeneralB=''
         if(bad!=''):
             print("entro sin vacio bad")
             badListC=len(list(filter(lambda x: bad in x , merged_list)))
+            valorGeneralB=[]
         else:
             print("entro vacio bad")
             sumaNegativo=[]
+            nombres=[]
             for e in Negativo.objects.all():
                 valor=len(list(filter(lambda x: e.nombre in x , merged_list)))
                 sumaNegativo.append(valor)
+                nombres.append(e.nombre)
+            reslut=dict(zip(nombres,sumaNegativo))
+            responseTotal=[]
+            for k,v in reslut.items():
+                data={
+                    "nombre":k,
+                    "valor":v
+                }
+                responseTotal.append(data)
             print(sumaNegativo)
             badListC=sumalista(sumaNegativo)
-
+            valorGeneralB=responseTotal
 
         sentimiento=[greatListC,neutralListC,badListC],
         print(sentimiento)
@@ -1243,7 +1440,10 @@ def getsocial(request):
             "time":resultado_time,
             "timeAll":timeAll,
             "domainAll":domain,
-            "sentimiento":sentimiento
+            "sentimiento":sentimiento,
+            "valorGeneral":valorGeneral,
+            "valorGeneralN":valorGeneralN,
+            "valorGeneralB":valorGeneralB
         }
         data=json.dumps(xxxx)
         return HttpResponse(data,content_type="application/json")
