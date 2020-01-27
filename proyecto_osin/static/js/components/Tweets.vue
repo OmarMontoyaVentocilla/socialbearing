@@ -201,22 +201,28 @@
     <br />
     <br />
     <br />
-    <div class="row">
-      <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
+    <div class="row well">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <p class="text-lat text-center">Análisis de sentimiento</p>
       </div>
-      <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
+    </div>
+
+    <div class="row well">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div id="content">
+          <canvas id="chart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="row well">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <p class="text-lat text-center">Análisis por tipo</p>
       </div>
     </div>
 
     <div class="row well">
-      <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
-        <div id="content">
-          <canvas id="chart"></canvas>
-        </div>
-      </div>
-      <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div id="content2">
           <canvas id="chart2"></canvas>
         </div>
@@ -226,42 +232,58 @@
     <br />
     <br />
     <div class="row well">
-      <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <p class="text-lat text-center">Análisis por dispositivo</p>
-      </div>
-      <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
-        <p class="text-lat text-center">Análisis por tiempo</p>
       </div>
     </div>
     <div class="row well">
-      <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div id="content3">
           <canvas id="chart3"></canvas>
         </div>
       </div>
-      <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
+    </div>
+    <div class="row well">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <p class="text-lat text-center">Análisis por tiempo</p>
+      </div>
+    </div>
+    <div class="row well">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div id="content4">
           <canvas id="chart4"></canvas>
         </div>
       </div>
     </div>
     <div class="row well">
-      <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <p class="text-lat text-center">Hastag Cloud</p>
       </div>
-      <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
+    </div>
+    <div class="row well">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+        <div id="content5">
+          <canvas id="chart5"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="row well">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <p class="text-lat text-center">Top Palabra Cloud</p>
       </div>
     </div>
     <div class="row well">
-      <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4 text-center">
-        <div id="content5">
-          <canvas id="chart5"></canvas>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+        <div id="content6">
+          <canvas id="chart6"></canvas>
         </div>
-        <!-- <a class="btn btn-primary" href="#open-modal">
+      </div>
+    </div>
+
+    <!-- <a class="btn btn-primary" href="#open-modal">
           Ver
-        </a>-->
-        <!-- <div id="open-modal" class="modal-window">
+    </a>-->
+    <!-- <div id="open-modal" class="modal-window">
   <div>
     <a href="#" title="Close" class="modal-close">Cerrar</a>
     <h1>Hastag Cloud</h1>
@@ -270,22 +292,15 @@
     </div>
    
     </div>
-        </div>-->
-      </div>
-      <div class="col-lg-6 col-md-4 col-sm-4 col-xs-4 text-center">
-        <div id="content6">
-          <canvas id="chart6"></canvas>
-        </div>
-        <!-- <button
+    </div>-->
+    <!-- <button
           type="button"
           class="btn btn-primary"
           data-toggle="modal"
           data-target="#dominio"
         >
           Ver
-        </button>-->
-      </div>
-    </div>
+    </button>-->
     <div class="row">
       <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
         <p class="text-lat">Ingrese los palabra a buscar:</p>
@@ -691,7 +706,7 @@ export default {
           //sentimiento nuevo
 
           var myChart = new Chart(ctx, {
-            type: "bar",
+            type: "horizontalBar",
             data: {
               labels: ["Positivo", "Neutro", "Negativo"],
               datasets: [
@@ -726,35 +741,34 @@ export default {
           });
 
           var myChart2 = new Chart(ctx2, {
-            type: "pie",
+            type: "line",
             data: {
               labels: ["Tweets", "Retweets", "Replies"],
               datasets: [
                 {
                   label: "Tipo",
                   data: dataTipo,
-                  backgroundColor: [
-                    "rgba(54, 162, 235, 0.2)",
-                    "rgba(255, 99, 132, 0.5)",
-                    "rgba(153, 102, 255, 0.2)"
-                  ],
-                  borderColor: [
-                    "rgba(255, 206, 86, 1)",
-                    "rgba(75, 192, 192, 1)",
-                    "rgba(153, 102, 255, 1)"
-                  ],
-                  borderWidth: 1
+                  lineTension: 0,
+                  backgroundColor: "transparent",
+                  pointColor: "blue",
+                  fill: true,
+                  pointBorderColor: "blue",
+                  pointBackgroundColor: "black",
+                  pointRadius: 5,
+                  pointHoverRadius: 10,
+                  pointHitRadius: 30,
+                  pointBorderWidth: 2,
+                  pointStyle: "rectRounded"
                 }
-              ],
-              options: {
-                scales: {
-                  yAxes: [
-                    {
-                      ticks: {
-                        beginAtZero: true
-                      }
-                    }
-                  ]
+              ]
+            },
+            options: {
+              legend: {
+                display: true,
+                position: "top",
+                labels: {
+                  boxWidth: 80,
+                  fontColor: "blue"
                 }
               }
             }
@@ -814,14 +828,14 @@ export default {
               labels: timeObjectI,
               datasets: [
                 {
-                  label: "Cantidad",
+                  label: "LÍNEA DE TIEMPO",
                   data: timeObjectV,
                   lineTension: 0,
                   backgroundColor: "transparent",
-                  borderColor: "black",
-                  borderDash: [5, 5],
-                  pointBorderColor: "orange",
-                  pointBackgroundColor: "rgba(255,150,0,0.5)",
+                  pointColor: "black",
+                  //borderDash: [5, 5],
+                  pointBorderColor: "black",
+                  pointBackgroundColor: "black",
                   pointRadius: 5,
                   pointHoverRadius: 10,
                   pointHitRadius: 30,
@@ -843,34 +857,49 @@ export default {
           });
 
           var myChart5 = new Chart(ctx5, {
-            type: "line",
+            type: "horizontalBar",
             data: {
               labels: HastagObjectI.slice(0, 10),
               datasets: [
                 {
-                  label: "Hastag",
+                  label: "HASHTAG",
                   data: HastagObjectV.slice(0, 10),
-                  lineTension: 0,
-                  backgroundColor: "transparent",
-                  borderColor: "black",
-                  borderDash: [5, 5],
-                  pointBorderColor: "orange",
-                  pointBackgroundColor: "rgba(255,150,0,0.5)",
-                  pointRadius: 5,
-                  pointHoverRadius: 10,
-                  pointHitRadius: 30,
-                  pointBorderWidth: 2,
-                  pointStyle: "rectRounded"
+                  backgroundColor: [
+                    "rgba(157,118,113,0.2)",
+                    "rgba(54, 162, 235, 0.2)",
+                    "rgba(255, 206, 86, 0.2)",
+                    "rgba(255, 206, 86, 1)",
+                    "rgba(75, 192, 192, 1)",
+                    "rgba(153, 102, 255, 1)",
+                    "rgba(167,161,72,0.53)",
+                    "rgba(59,187,188,0.53)",
+                    "rgba(255, 99, 132, 0.5)",
+                    "rgba(54, 162, 235, 0.2)"
+                  ],
+                  borderColor: [
+                    "rgba(157,118,113,0.2)",
+                    "rgba(157,118,113,0.2)",
+                    "rgba(157,118,113,0.2)",
+                    "rgba(157,118,113,0.2)",
+                    "rgba(157,118,113,0.2)",
+                    "rgba(157,118,113,0.2)",
+                    "rgba(157,118,113,0.2)",
+                    "rgba(157,118,113,0.2)",
+                    "rgba(157,118,113,0.2)",
+                    "rgba(157,118,113,0.2)"
+                  ],
+                  borderWidth: 1
                 }
-              ]
-            },
-            options: {
-              legend: {
-                display: true,
-                position: "top",
-                labels: {
-                  boxWidth: 80,
-                  fontColor: "black"
+              ],
+              options: {
+                scales: {
+                  yAxes: [
+                    {
+                      ticks: {
+                        beginAtZero: true
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -882,16 +911,17 @@ export default {
               labels: wordObjectI.slice(0, 10),
               datasets: [
                 {
-                  label: "Palabra",
+                  label: "Cantidad",
                   data: wordObjectV.slice(0, 10),
                   lineTension: 0,
                   backgroundColor: "transparent",
-                  borderColor: "black",
-                  borderDash: [5, 5],
-                  pointBorderColor: "orange",
-                  pointBackgroundColor: "rgba(255,150,0,0.5)",
+                  pointColor: "black",
+                  //borderDash: [5, 5],
+                  pointBorderColor: "black",
+                  pointBackgroundColor: "black",
                   pointRadius: 5,
                   pointHoverRadius: 10,
+                  fill: false,
                   pointHitRadius: 30,
                   pointBorderWidth: 2,
                   pointStyle: "rectRounded"
@@ -900,7 +930,7 @@ export default {
             },
             options: {
               legend: {
-                display: true,
+                display: false,
                 position: "top",
                 labels: {
                   boxWidth: 80,
