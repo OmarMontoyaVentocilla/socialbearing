@@ -204,6 +204,14 @@
     <div class="row well">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <p class="text-lat text-center">Análisis de sentimiento</p>
+        <center>
+          <a
+            class="btn btn-primary"
+            href="#open-modal"
+            data-toggle="modal"
+            data-target="#open-modal"
+          >Ver detalle</a>
+        </center>
       </div>
     </div>
 
@@ -280,27 +288,107 @@
       </div>
     </div>
 
-    <!-- <a class="btn btn-primary" href="#open-modal">
-          Ver
-    </a>-->
-    <!-- <div id="open-modal" class="modal-window">
-  <div>
-    <a href="#" title="Close" class="modal-close">Cerrar</a>
-    <h1>Hastag Cloud</h1>
-    <div>
-      ds
+    <div id="open-modal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Detalle de sentimiento:</h4>
+          </div>
+          <div class="modal-body">
+            <h4 class="modal-title text-center">Positivo:</h4>
+            <br />
+            <div class="panel panel-success panel_estilo">
+              <div class="panel-body div1 table-responsive">
+                <table
+                  class="table table-bordered table-hover table-fixed table-striped"
+                  style="background:white;"
+                >
+                  <thead>
+                    <tr>
+                      <th>Palabra</th>
+                      <th>Cantidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <template v-if="valorGeneral!= ''">
+                      <tr v-for="(list, index) in valorGeneral">
+                        <td class="nombre_info">{{ list.nombre }}</td>
+                        <td class="nombre_info">{{ list.valor}}</td>
+                      </tr>
+                    </template>
+                    <template v-else>
+                      <td colspan="2" class="nombre_info text-center">No hay resultados</td>
+                    </template>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <br />
+            <br />
+            <h4 class="modal-title text-center">Neutro:</h4>
+            <br />
+            <div class="panel panel-success panel_estilo">
+              <div class="panel-body div1 table-responsive">
+                <table
+                  class="table table-bordered table-hover table-fixed table-striped"
+                  style="background:white;"
+                >
+                  <thead>
+                    <tr>
+                      <th>Palabra</th>
+                      <th>Cantidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <template v-if="valorGeneralN!= ''">
+                      <tr v-for="(list, index) in valorGeneralN">
+                        <td class="nombre_info">{{ list.nombre }}</td>
+                        <td class="nombre_info">{{ list.valor}}</td>
+                      </tr>
+                    </template>
+                    <template v-else>
+                      <td colspan="2" class="nombre_info text-center">No hay resultados</td>
+                    </template>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <br />
+            <br />
+            <h4 class="modal-title text-center">Negativo:</h4>
+            <br />
+            <div class="panel panel-success panel_estilo">
+              <div class="panel-body div1 table-responsive">
+                <table
+                  class="table table-bordered table-hover table-fixed table-striped"
+                  style="background:white;"
+                >
+                  <thead>
+                    <tr>
+                      <th>Palabra</th>
+                      <th>Cantidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <template v-if="valorGeneralB!= ''">
+                      <tr v-for="(list, index) in valorGeneralB">
+                        <td class="nombre_info">{{ list.nombre }}</td>
+                        <td class="nombre_info">{{ list.valor}}</td>
+                      </tr>
+                    </template>
+                    <template v-else>
+                      <td colspan="2" class="nombre_info text-center">No hay resultados</td>
+                    </template>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-   
-    </div>
-    </div>-->
-    <!-- <button
-          type="button"
-          class="btn btn-primary"
-          data-toggle="modal"
-          data-target="#dominio"
-        >
-          Ver
-    </button>-->
+
     <div class="row">
       <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
         <p class="text-lat">Ingrese los palabra a buscar:</p>
@@ -361,7 +449,10 @@
                           <td class="nombre_info">{{ list.user && list.user.name }}</td>
                         </tr>
                         <tr>
-                          <td class>{{ list.full_text }}</td>
+                          <td
+                            class="textResponse"
+                            id="textResponse"
+                          >{{ replaceURLWithHTMLLinks(list.full_text)}}</td>
                         </tr>
                         <tr>
                           <td class="nombre_link">
@@ -408,70 +499,6 @@
       </div>
     </div>
   </div>
-
-  <!-- <div class="row">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="panel panel-success panel_estilo">
-          <div class="panel-body div1 table-responsive">
-            <table
-              class="table table-bordered table-hover table-fixed table-striped"
-              style="background:white;"
-            >
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Datos</th>
-                </tr>
-              </thead>
-              <tbody>
-                <template v-if="listaTweet!=''">
-                  <tr v-for="(list,index) in listaTweet">
-                    <td>{{list.id_str}}</td>
-                    <td>
-                      <table class="table table-bordered">
-                        <tr>
-                          <td rowspan="6" class="estilo_wi_rows">
-                            <img :src="list.user.profile_image_url_https" />
-                          </td>
-                          <td class="nombre_info">{{list.user.name}}</td>
-                        </tr>
-                        <tr>
-                          <td class>{{list.full_text}}</td>
-                        </tr>
-                        <tr>
-                          <td class="nombre_link">
-                            <a
-                              :href="list.user.screen_name"
-                              target="_blank"
-                            >Usuario: {{"https://twitter.com/"+list.user.screen_name}}</a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="nombre_info">Dirección: {{list.user.location}}</td>
-                        </tr>
-                        <tr>
-                          <td class="nombre_info">Descripción: {{list.user.description}}</td>
-                        </tr>
-                        <tr>
-                          <td
-                            class="nombre_info"
-                          >Fecha de creación: {{format_date(list.created_at)}}</td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
-                </template>
-                <template v-else>
-                  <tr>
-                    <td colspan="3" align="center">No hay resultados disponibles</td>
-                  </tr>
-                </template>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-  </div>-->
 </template>
 <script>
 import swal from "sweetalert";
@@ -479,13 +506,9 @@ import VueCharts from "vue-chartjs";
 import CommitChart from "./chart";
 import JQuery from "jquery";
 import Chart from "chart.js";
-// import Raphael from "raphael/raphael";
-// global.Raphael = Raphael;
 import moment from "moment";
 import "moment/locale/es";
 
-//import { DonutChart, BarChart, LineChart, AreaChart } from "vue-morris";
-//import XLSX from "xlsx";
 var tokent = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 var config = {
   headers: { "X-CSRFToken": tokent }
@@ -507,6 +530,8 @@ export default {
     this.getPositivo();
     this.getNeutro();
     this.getNegativo();
+
+    //var elm=document.getElementById("text2url");elm.innerHTML=replaceURLWithHTMLLinks(elm.innerHTML);});
   },
   mounted() {},
   components: {
@@ -517,6 +542,9 @@ export default {
     return {
       listaTweet: [],
       positivo: [],
+      valorGeneral: [],
+      valorGeneralN: [],
+      valorGeneralB: [],
       neutro: [],
       names: ["Positivo", "Neutro", "Negativo"],
       values: [],
@@ -576,6 +604,22 @@ export default {
         });
     },
 
+    replaceURLWithHTMLLinks(e) {
+      return e.replace(
+        /(\(.*?)?\b((?:https?|ftp|file):\/\/[-a-z0-9+&@#\/%?=~_()|!:,.;]*[-a-z0-9+&@#\/%=~_()|])/gi,
+        function(e, r, n) {
+          var t = "";
+          r = r || "";
+          for (var a = /\(/g; a.exec(r); ) {
+            var l;
+            (l = /(.*)(\.\).*)/.exec(n) || /(.*)(\).*)/.exec(n)) &&
+              ((n = l[1]), (t = l[2] + t));
+          }
+          return "";
+        }
+      );
+    },
+
     getNegativo() {
       axios
         .get("http://127.0.0.1:8000/api/negativo/")
@@ -622,6 +666,9 @@ export default {
         .then(response => {
           console.log(response);
           this.listaTweet = response.data;
+          this.valorGeneral = response.data.valorGeneral;
+          this.valorGeneralN = response.data.valorGeneralN;
+          this.valorGeneralB = response.data.valorGeneralB;
           var dataTipo = [
             response.data.CountTwets,
             response.data.retweetsCount,
@@ -660,7 +707,7 @@ export default {
           var wordObjectV = Object.values(
             response.data.palabraListMasRepetidos
           );
-
+          //this.replaceURLWithHTMLLinks($("#textResponse").html());
           var chart = document.getElementById("content");
           chart.innerHTML = "&nbsp;";
           $("#content").append('<canvas id="chart"><canvas>');
