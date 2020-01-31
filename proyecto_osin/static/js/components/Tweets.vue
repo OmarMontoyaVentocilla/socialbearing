@@ -265,7 +265,7 @@
     </div>
     <div class="row well">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <p class="text-lat text-center">Hastag Cloud</p>
+        <p class="text-lat text-center">HASHTAG CLOUD</p>
       </div>
     </div>
     <div class="row well">
@@ -761,14 +761,14 @@ export default {
                   label: "Sentimiento",
                   data: response.data.sentimiento[0],
                   backgroundColor: [
-                    "rgba(255, 99, 132, 0.2)",
-                    "rgba(54, 162, 235, 0.2)",
-                    "rgba(255, 206, 86, 0.2)"
+                    "rgba(90, 190, 120, 1)",
+                    "rgba(214, 181, 52, 1)",
+                    "rgba(184, 59, 69, 1)"
                   ],
                   borderColor: [
-                    "rgba(54, 162, 235, 1)",
-                    "rgba(255, 206, 86, 1)",
-                    "rgba(153, 102, 255, 1)"
+                    "rgba(90, 190, 120, 1)",
+                    "rgba(214, 181, 52, 1)",
+                    "rgba(184, 59, 69, 1)"
                   ],
                   borderWidth: 1
                 }
@@ -788,35 +788,36 @@ export default {
           });
 
           var myChart2 = new Chart(ctx2, {
-            type: "line",
+            type: "pie",
             data: {
               labels: ["Tweets", "Retweets", "Replies"],
               datasets: [
                 {
                   label: "Tipo",
                   data: dataTipo,
-                  lineTension: 0,
-                  backgroundColor: "transparent",
-                  pointColor: "blue",
-                  fill: true,
-                  pointBorderColor: "blue",
-                  pointBackgroundColor: "black",
-                  pointRadius: 5,
-                  pointHoverRadius: 10,
-                  pointHitRadius: 30,
-                  pointBorderWidth: 2,
-                  pointStyle: "rectRounded"
+                  backgroundColor: [
+                    "rgba(54, 162, 235, 0.2)",
+                    "rgba(93,161,72,0.53)",
+                    "rgba(173,18,0,0.53)"
+                  ],
+                  borderColor: [
+                    "rgba(54, 162, 235, 0.2)",
+                    "rgba(93,161,72,0.53)",
+                    "rgba(173,18,0,0.53)"
+                  ],
+                  borderWidth: 1
                 }
               ]
             },
             options: {
-              legend: {
-                display: true,
-                position: "top",
-                labels: {
-                  boxWidth: 80,
-                  fontColor: "blue"
-                }
+              scales: {
+                yAxes: [
+                  {
+                    ticks: {
+                      beginAtZero: true
+                    }
+                  }
+                ]
               }
             }
           });
@@ -879,10 +880,10 @@ export default {
                   data: timeObjectV,
                   lineTension: 0,
                   backgroundColor: "transparent",
-                  pointColor: "black",
+                  pointColor: "rgba(0, 0, 0, 1)",
                   //borderDash: [5, 5],
-                  pointBorderColor: "black",
-                  pointBackgroundColor: "black",
+                  pointBorderColor: "rgba(0, 0, 0, 1)",
+                  pointBackgroundColor: "rgba(0, 0, 0, 1)",
                   pointRadius: 5,
                   pointHoverRadius: 10,
                   pointHitRadius: 30,
@@ -897,7 +898,7 @@ export default {
                 position: "top",
                 labels: {
                   boxWidth: 80,
-                  fontColor: "black"
+                  fontColor: "rgba(0, 0, 0, 1)"
                 }
               }
             }
@@ -962,10 +963,10 @@ export default {
                   data: wordObjectV.slice(0, 10),
                   lineTension: 0,
                   backgroundColor: "transparent",
-                  pointColor: "black",
+                  pointColor: "rgba(0, 0, 0, 1)",
                   //borderDash: [5, 5],
-                  pointBorderColor: "black",
-                  pointBackgroundColor: "black",
+                  pointBorderColor: "rgba(0, 0, 0, 1)",
+                  pointBackgroundColor: "rgba(0, 0, 0, 1)",
                   pointRadius: 5,
                   pointHoverRadius: 10,
                   fill: false,
@@ -981,7 +982,7 @@ export default {
                 position: "top",
                 labels: {
                   boxWidth: 80,
-                  fontColor: "black"
+                  fontColor: "rgba(0, 0, 0, 1)"
                 }
               }
             }
