@@ -913,8 +913,12 @@ def getsocial(request):
         noy=list(filter(lambda x:'y' not in x, nodonde))
         noel=list(filter(lambda x:'el' not in x, noy))
         noyo=list(filter(lambda x:'yo' not in x, noel))
-        nocuando=list(filter(lambda x:'cuando' not in x, noyo))     
-        palabraListMasRepetidos=contarElementosLista(nocuando)
+        nocuando=list(filter(lambda x:'cuando' not in x, noyo))
+        nosu=list(filter(lambda x:'su' not in x, nocuando))  
+        noseee=list(filter(lambda x:'se' not in x, nosu))
+        noporx=list(filter(lambda x:'por' not in x, noseee))   
+        nolos=list(filter(lambda x:'los' not in x, noporx))      
+        palabraListMasRepetidos=contarElementosLista(nolos)
         ####FILTRAR POR IPHONE
         resultado_time=contarElementosLista(timeAll)
         ######
@@ -1121,8 +1125,12 @@ def getsocial(request):
         noy=list(filter(lambda x:'y' not in x, nodonde))
         noel=list(filter(lambda x:'el' not in x, noy))
         noyo=list(filter(lambda x:'yo' not in x, noel))
-        nocuando=list(filter(lambda x:'cuando' not in x, noyo))     
-        palabraListMasRepetidos=contarElementosLista(nocuando)
+        nocuando=list(filter(lambda x:'cuando' not in x, noyo))
+        nosu=list(filter(lambda x:'su' not in x, nocuando))  
+        noseee=list(filter(lambda x:'se' not in x, nosu))
+        noporx=list(filter(lambda x:'por' not in x, noseee))   
+        nolos=list(filter(lambda x:'los' not in x, noporx))      
+        palabraListMasRepetidos=contarElementosLista(nolos)
         ####FILTRAR POR IPHONE
         resultado_time=contarElementosLista(timeAll)
         ######
@@ -1329,8 +1337,12 @@ def getsocial(request):
         noy=list(filter(lambda x:'y' not in x, nodonde))
         noel=list(filter(lambda x:'el' not in x, noy))
         noyo=list(filter(lambda x:'yo' not in x, noel))
-        nocuando=list(filter(lambda x:'cuando' not in x, noyo))     
-        palabraListMasRepetidos=contarElementosLista(nocuando)
+        nocuando=list(filter(lambda x:'cuando' not in x, noyo))
+        nosu=list(filter(lambda x:'su' not in x, nocuando))  
+        noseee=list(filter(lambda x:'se' not in x, nosu))
+        noporx=list(filter(lambda x:'por' not in x, noseee))   
+        nolos=list(filter(lambda x:'los' not in x, noporx))      
+        palabraListMasRepetidos=contarElementosLista(nolos)
         ####FILTRAR POR IPHONE
         resultado_time=contarElementosLista(timeAll)
         ######
