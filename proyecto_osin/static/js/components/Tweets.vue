@@ -880,11 +880,13 @@ export default {
                   data: timeObjectV,
                   lineTension: 0,
                   backgroundColor: "transparent",
-                  pointColor: "rgba(0, 0, 0, 1)",
-                  //borderDash: [5, 5],
-                  pointBorderColor: "rgba(0, 0, 0, 1)",
-                  pointBackgroundColor: "rgba(0, 0, 0, 1)",
+                  pointColor: "rgba(14, 0, 21, 1)",
+                  borderColor: "rgba(14, 0, 21, 1)", //borderDash: [5, 5],
+                  pointBorderColor: "rgba(14, 0, 21, 1)",
+                  pointBackgroundColor: "rgba(14, 0, 21, 1)",
+                  pointHoverBackgroundColor: "rgba(14, 0, 21, 1)",
                   pointRadius: 5,
+                  pointBorderWidth: 10,
                   pointHoverRadius: 10,
                   pointHitRadius: 30,
                   pointBorderWidth: 2,
@@ -898,7 +900,7 @@ export default {
                 position: "top",
                 labels: {
                   boxWidth: 80,
-                  fontColor: "rgba(0, 0, 0, 1)"
+                  fontColor: "rgba(14, 0, 21, 1)"
                 }
               }
             }
@@ -963,11 +965,14 @@ export default {
                   data: wordObjectV.slice(0, 10),
                   lineTension: 0,
                   backgroundColor: "transparent",
-                  pointColor: "rgba(0, 0, 0, 1)",
-                  //borderDash: [5, 5],
-                  pointBorderColor: "rgba(0, 0, 0, 1)",
-                  pointBackgroundColor: "rgba(0, 0, 0, 1)",
+                  pointColor: "rgba(14, 0, 21, 1)",
+                  borderColor: "rgba(14, 0, 21, 1)", //borderDash: [5, 5],
+                  pointBorderColor: "rgba(14, 0, 21, 1)",
+                  pointBackgroundColor: "rgba(14, 0, 21, 1)",
+                  pointHoverBackgroundColor: "rgba(14, 0, 21, 1)",
                   pointRadius: 5,
+                  pointBorderWidth: 10,
+                  pointHoverRadius: 10,
                   pointHoverRadius: 10,
                   fill: false,
                   pointHitRadius: 30,
@@ -982,7 +987,7 @@ export default {
                 position: "top",
                 labels: {
                   boxWidth: 80,
-                  fontColor: "rgba(0, 0, 0, 1)"
+                  fontColor: "rgba(14, 0, 21, 1)"
                 }
               }
             }
