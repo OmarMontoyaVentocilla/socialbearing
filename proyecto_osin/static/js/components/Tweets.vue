@@ -202,7 +202,7 @@
     <br />
     <br />
     <div class="row well">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
         <p class="text-lat text-center">Análisis de sentimiento</p>
         <center>
           <a
@@ -213,49 +213,37 @@
           >Ver detalle</a>
         </center>
       </div>
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <p class="text-lat text-center">Análisis por tipo</p>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <p class="text-lat text-center">Análisis por dispositivo</p>
+      </div>
     </div>
-
+    <br />
+    <br />
+    <br />
     <div class="row well">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
         <div id="content">
           <canvas id="chart"></canvas>
         </div>
       </div>
-    </div>
-
-    <div class="row well">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <p class="text-lat text-center">Análisis por tipo</p>
-      </div>
-    </div>
-
-    <div class="row well">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
         <div id="content2">
           <canvas id="chart2"></canvas>
         </div>
       </div>
-    </div>
-    <br />
-    <br />
-    <br />
-    <div class="row well">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <p class="text-lat text-center">Análisis por dispositivo</p>
-      </div>
-    </div>
-    <div class="row well">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
         <div id="content3">
           <canvas id="chart3"></canvas>
         </div>
       </div>
     </div>
-    <div class="row well">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <p class="text-lat text-center">Análisis por tiempo</p>
-      </div>
-    </div>
+    <br />
+    <br />
+    <br />
+
     <div class="row well">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div id="content4">
@@ -263,11 +251,7 @@
         </div>
       </div>
     </div>
-    <div class="row well">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <p class="text-lat text-center">HASHTAG CLOUD</p>
-      </div>
-    </div>
+
     <div class="row well">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
         <div id="content5">
@@ -753,7 +737,7 @@ export default {
           //sentimiento nuevo
 
           var myChart = new Chart(ctx, {
-            type: "horizontalBar",
+            type: "pie",
             data: {
               labels: ["Positivo", "Neutro", "Negativo"],
               datasets: [
@@ -772,17 +756,17 @@ export default {
                   ],
                   borderWidth: 1
                 }
-              ],
-              options: {
-                scales: {
-                  yAxes: [
-                    {
-                      ticks: {
-                        beginAtZero: true
-                      }
+              ]
+            },
+            options: {
+              scales: {
+                yAxes: [
+                  {
+                    ticks: {
+                      beginAtZero: true
                     }
-                  ]
-                }
+                  }
+                ]
               }
             }
           });
