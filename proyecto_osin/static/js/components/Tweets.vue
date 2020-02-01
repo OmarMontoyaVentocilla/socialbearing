@@ -202,7 +202,7 @@
     <br />
     <br />
     <div class="row well">
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <p class="text-lat text-center">Análisis de sentimiento</p>
         <center>
           <a
@@ -213,36 +213,48 @@
           >Ver detalle</a>
         </center>
       </div>
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <p class="text-lat text-center">Análisis por tipo</p>
       </div>
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+      <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
         <p class="text-lat text-center">Análisis por dispositivo</p>
-      </div>
+      </div>-->
     </div>
     <br />
     <br />
     <br />
     <div class="row well">
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <div id="content">
           <canvas id="chart"></canvas>
         </div>
       </div>
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <div id="content2">
           <canvas id="chart2"></canvas>
         </div>
       </div>
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+      <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <div id="content3">
+          <canvas id="chart3"></canvas>
+        </div>
+      </div>-->
+    </div>
+    <br />
+    <br />
+    <br />
+    <div class="row well">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <p class="text-lat text-center">Análisis por dispositivo</p>
+      </div>
+    </div>
+    <div class="row well">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div id="content3">
           <canvas id="chart3"></canvas>
         </div>
       </div>
     </div>
-    <br />
-    <br />
-    <br />
 
     <div class="row well">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -253,19 +265,20 @@
     </div>
 
     <div class="row well">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <div id="content5">
-          <canvas id="chart5"></canvas>
-        </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <p class="text-lat text-center">HASHTAG</p>
       </div>
-    </div>
-    <div class="row well">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <p class="text-lat text-center">Top Palabra Cloud</p>
       </div>
     </div>
     <div class="row well">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+        <div id="content5">
+          <canvas id="chart5"></canvas>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
         <div id="content6">
           <canvas id="chart6"></canvas>
         </div>
@@ -940,28 +953,53 @@ export default {
           });
 
           var myChart6 = new Chart(ctx6, {
-            type: "line",
+            type: "horizontalBar",
             data: {
               labels: wordObjectI.slice(0, 10),
               datasets: [
                 {
                   label: "Cantidad",
                   data: wordObjectV.slice(0, 10),
-                  lineTension: 0,
-                  backgroundColor: "transparent",
-                  pointColor: "rgba(14, 0, 21, 1)",
-                  borderColor: "rgba(14, 0, 21, 1)", //borderDash: [5, 5],
-                  pointBorderColor: "rgba(14, 0, 21, 1)",
-                  pointBackgroundColor: "rgba(14, 0, 21, 1)",
-                  pointHoverBackgroundColor: "rgba(14, 0, 21, 1)",
-                  pointRadius: 5,
-                  pointBorderWidth: 10,
-                  pointHoverRadius: 10,
-                  pointHoverRadius: 10,
-                  fill: false,
-                  pointHitRadius: 30,
-                  pointBorderWidth: 2,
-                  pointStyle: "rectRounded"
+                  backgroundColor: [
+                    "rgba(14, 0, 21, 1)",
+                    "rgba(14, 0, 21, 1)",
+                    "rgba(14, 0, 21, 1)",
+                    "rgba(14, 0, 21, 1)",
+                    "rgba(14, 0, 21, 1)",
+                    "rgba(14, 0, 21, 1)",
+                    "rgba(14, 0, 21, 1)",
+                    "rgba(14, 0, 21, 1)",
+                    "rgba(14, 0, 21, 1)",
+                    "rgba(14, 0, 21, 1)"
+                  ],
+                  borderColor: [
+                    "rgba(14, 0, 21, 1)",
+                    "rgba(14, 0, 21, 1)",
+                    "rgba(14, 0, 21, 1)",
+                    "rgba(14, 0, 21, 1)",
+                    "rgba(14, 0, 21, 1)",
+                    "rgba(14, 0, 21, 1)",
+                    "rgba(14, 0, 21, 1)",
+                    "rgba(14, 0, 21, 1)",
+                    "rgba(14, 0, 21, 1)",
+                    "rgba(14, 0, 21, 1)"
+                  ],
+                  borderWidth: 1
+                  // lineTension: 0,
+                  // backgroundColor: "transparent",
+                  // pointColor: "rgba(14, 0, 21, 1)",
+                  // borderColor: "rgba(14, 0, 21, 1)", //borderDash: [5, 5],
+                  // pointBorderColor: "rgba(14, 0, 21, 1)",
+                  // pointBackgroundColor: "rgba(14, 0, 21, 1)",
+                  // pointHoverBackgroundColor: "rgba(14, 0, 21, 1)",
+                  // pointRadius: 5,
+                  // pointBorderWidth: 10,
+                  // pointHoverRadius: 10,
+                  // pointHoverRadius: 10,
+                  // fill: false,
+                  // pointHitRadius: 30,
+                  // pointBorderWidth: 2,
+                  // pointStyle: "rectRounded"
                 }
               ]
             },
