@@ -154,7 +154,7 @@
           />
     </div>-->
 
-    <div class="row well">
+    <div class="row well fontPrincipal">
       <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
       <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
         <p>TWEETS</p>
@@ -1093,6 +1093,13 @@ export default {
 <style scoped>
 .text-lat {
   color: #15202a;
+}
+
+.fontPrincipal {
+  background: #32476f;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
 }
 
 .table-bordered,
